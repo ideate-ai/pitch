@@ -1,0 +1,29 @@
+id: execution-strategy
+type: module
+title: Execution Strategy — Refinement Cycle 2
+mode: sequential
+max_concurrent_agents: 1
+worktrees_enabled: false
+worktrees_reason: "Single file project."
+review_cadence: after_every_item
+work_item_groups:
+  - group: 1
+    mode: sequential
+    items: [011]
+  - group: 2
+    mode: sequential
+    depends_on_group: 1
+    items: [012]
+  - group: 3
+    mode: sequential
+    depends_on_group: 2
+    items: [013]
+agent_config:
+  worker_model: opus
+  reviewer_model: sonnet
+  permission_mode: acceptEdits
+dependency_graph: |
+  WI-011 → WI-012 → WI-013
+  structure   copy     layout
+cycle_created: 2
+cycle_modified: null

@@ -1,0 +1,7 @@
+id: C-03
+type: constraint
+category: scope
+status: active
+description: "20-30 minute presentation duration. Approximately 30-45 slides including title and closing. Each slide averages 30-60 seconds of talk time."
+cycle_created: 0
+cycle_modified: null

@@ -1,0 +1,7 @@
+id: C-01
+type: constraint
+category: technology
+status: active
+description: "Reveal.js presentation framework. Single HTML file with embedded CSS/JS, CDN-loaded dependencies. No build step required."
+cycle_created: 0
+cycle_modified: null

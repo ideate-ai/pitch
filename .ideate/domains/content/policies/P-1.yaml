@@ -1,0 +1,11 @@
+id: P-1
+type: policy
+domain: "content"
+title: "Technical Claims Require Implementation Backing"
+rule: "Every technical claim on a slide must reference real implementation detail from ideate's codebase — no marketing abstractions or vaporware."
+derived_from: "GP-01 (Technical Depth as Differentiator)"
+established: planning phase
+status: active
+amended_by: null
+cycle_created: 0
+cycle_modified: null

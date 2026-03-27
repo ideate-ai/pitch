@@ -1,0 +1,11 @@
+id: P-3
+type: policy
+domain: "content"
+title: "Problem Before Solution"
+rule: "The audience must recognize and feel the problem before any solution is introduced. Acts 1-2 establish pain; Act 3+ addresses it."
+derived_from: "GP-03 (Problem-First Narrative)"
+established: planning phase
+status: active
+amended_by: null
+cycle_created: 0
+cycle_modified: null

@@ -1,0 +1,170 @@
+id: architecture
+type: module
+title: "ideate Pitch Deck — Reveal.js Presentation"
+summary: |
+  A single-file reveal.js presentation (~35 slides) that pitches ideate to engineering
+  leaders and thought leaders. The deck follows a 7-act narrative arc: Problem → Vision →
+  How It Works → PPR Deep Dive → Integration → Proof → Close. All content, styling, and
+  assets are embedded in one index.html file with CDN-loaded dependencies for maximum
+  portability.
+
+components:
+  presentation_scaffold:
+    description: "HTML5 document with reveal.js 5.x loaded via CDN, KaTeX math plugin, highlight.js for code, custom dark theme CSS embedded in <style>"
+    files:
+      - index.html
+    dependencies:
+      cdn:
+        - "reveal.js 5.x (core + plugins: markdown, highlight, math, notes)"
+        - "KaTeX (for PPR mathematical notation)"
+        - "highlight.js (for YAML/TypeScript/SQL code blocks)"
+    theme:
+      base: "black"
+      customizations: "Custom color palette, typography, accent colors for branding. Gradient backgrounds for section dividers. Subtle glow effects for emphasis."
+
+  narrative_structure:
+    acts:
+      - id: act-1
+        title: "The Problem"
+        duration_minutes: "4-5"
+        slides: 5
+        purpose: "Establish pain. Current AI tools are feature-level, agreeable, uncritical."
+        content:
+          - "Title slide with ideate branding"
+          - "The AI Coding Revolution — what exists today"
+          - "Still Thinking Small — features not projects"
+          - "The Yes-Machine Problem — AI that never pushes back"
+          - "What's Missing — structured feedback, knowledge accumulation, critical analysis"
+
+      - id: act-2
+        title: "The Vision"
+        duration_minutes: "2-3"
+        slides: 3
+        purpose: "Paradigm shift. What if AI managed projects, not just tasks?"
+        content:
+          - "What if AI could manage a project?"
+          - "Introducing ideate — one line elevator pitch"
+          - "The Full SDLC Loop — plan → execute → review → refine → converge"
+
+      - id: act-3
+        title: "How It Works"
+        duration_minutes: "7-8"
+        slides: 8
+        purpose: "Walk through ideate's SDLC phases with concrete examples."
+        content:
+          - "Planning That Interrogates — active ambiguity hunting with trigger words"
+          - "Guiding Principles — decision framework, not instructions (YAML example)"
+          - "Spec Sufficiency — two LLMs, same spec, equivalent output"
+          - "Decomposition — work items with [machine]/[human] acceptance criteria"
+          - "9 Specialized Agents — architect, reviewer, gap analyst, etc."
+          - "Critical Review — multi-perspective, not rubber-stamp"
+          - "Domain Knowledge Layer — policies, decisions, questions that accumulate"
+          - "The brrr Loop — autonomous convergence"
+
+      - id: act-4
+        title: "The Science — PPR Deep Dive"
+        duration_minutes: "7-8"
+        slides: 10
+        purpose: "Technical deep dive into PPR. Build from first principles. Show this is real science, not heuristics."
+        content:
+          - "The Context Problem — why retrieval quality determines output quality"
+          - "ideate's Knowledge Graph — 12 node types, 10 edge types, SQLite backbone"
+          - "PageRank — The Original Insight (random surfer model, web analogy)"
+          - "From Web to Knowledge — why ranking matters for artifact graphs"
+          - "Personalized PageRank — seed nodes, teleportation, biased random walks"
+          - "The Math — PPR formula with KaTeX, damping factor α, transition matrix"
+          - "Walking the Graph — animated step-by-step on a real ideate artifact subgraph"
+          - "Edge-Type Weighting — different tasks weight edges differently (table)"
+          - "vs. Naive Retrieval — comparison diagram, HippoRAG results (10-20x cheaper, 6-13x faster)"
+          - "Not Heuristics — Science — grounded in graph theory and Markov chains"
+
+      - id: act-5
+        title: "Integration & Teams"
+        duration_minutes: "3-4"
+        slides: 4
+        purpose: "Show ideate fits into existing process. Hook system for external tools."
+        content:
+          - "Your Process, Supercharged — ideate slots into existing workflows"
+          - "The Hook System — event-driven integration (hooks.json example)"
+          - "Jira, Slack, and Beyond — concrete hook examples for common tools"
+          - "Metrics & Observability — cost-quality tracking, token efficiency"
+
+      - id: act-6
+        title: "Proof"
+        duration_minutes: "3-4"
+        slides: 4
+        purpose: "Concrete evidence. Dogfooding stats, meta-narrative, real results."
+        content:
+          - "Eating Our Own Dog Food — 59 cycles, 1161 artifacts building ideate itself"
+          - "By the Numbers — work items, decisions, policies, research findings"
+          - "This Deck — built with ideate (meta-narrative)"
+          - "Real Results — productivity gains, convergence metrics"
+
+      - id: act-7
+        title: "Close"
+        duration_minutes: "1-2"
+        slides: 2
+        purpose: "Vision and call to action."
+        content:
+          - "The Future of Development — from AI assistant to AI engineer"
+          - "Get Started / Q&A"
+
+  visual_design:
+    color_palette:
+      background: "#0a0a0f"
+      surface: "#12121a"
+      primary_accent: "#6366f1"
+      secondary_accent: "#22d3ee"
+      text_primary: "#e2e8f0"
+      text_secondary: "#94a3b8"
+      code_background: "#1e1e2e"
+      success: "#10b981"
+      warning: "#f59e0b"
+      danger: "#ef4444"
+    typography:
+      headings: "Inter or system sans-serif, bold"
+      body: "Inter or system sans-serif, regular"
+      code: "JetBrains Mono or Fira Code, monospace"
+    effects:
+      section_dividers: "Gradient backgrounds transitioning between accent colors"
+      code_blocks: "Syntax-highlighted with line-by-line fragment reveal"
+      ppr_walkthrough: "Auto-animate morphing between graph states"
+      diagrams: "CSS/SVG-drawn, not images — clean scaling at any resolution"
+
+  reveal_features:
+    auto_animate: "Used for PPR graph walkthrough (morphing node highlights between steps) and SDLC cycle diagram"
+    fragments: "Progressive disclosure on complex slides — build up the PPR formula term by term, reveal agent roles one by one"
+    vertical_slides: "PPR deep dive uses vertical slides for the step-by-step walkthrough"
+    code_highlighting: "YAML examples from ideate artifacts, TypeScript from MCP server, SQL from schema"
+    katex: "PPR formula, damping factor, transition matrix notation"
+    speaker_notes: "Every slide has notes with talking points and timing guidance"
+    overview_mode: "Enabled for navigation during Q&A"
+
+data_flow: |
+  The presentation is a static HTML file. No server required. Dependencies load via CDN.
+  Browser renders slides. Presenter uses arrow keys or presenter view (S key).
+
+  CDN → index.html → Browser rendering
+
+  No build step. No npm. Open index.html in any modern browser.
+
+interface_contracts: []
+
+execution_order:
+  - "WI-001: Scaffold (HTML structure, CDN deps, custom CSS theme)"
+  - "WI-002: Act 1-2 slides (Problem + Vision)"
+  - "WI-003: Act 3 slides (How It Works)"
+  - "WI-004: Act 4 slides (PPR Deep Dive — largest section)"
+  - "WI-005: Act 5-6 slides (Integration + Proof)"
+  - "WI-006: Act 7 slides (Close) + speaker notes for all slides + animation polish"
+
+design_tensions:
+  - tension: "Slide density vs. self-contained readability"
+    resolution: "GP-02 resolves this: enough text to stand alone, visual hierarchy prevents walls of text. Speaker notes carry supplementary detail."
+  - tension: "Mathematical rigor vs. accessibility in PPR section"
+    resolution: "GP-07 resolves this: show the real math (KaTeX) but build to it incrementally. Start with intuition (random surfer), then formalize. Every formula is preceded by the plain-English version."
+  - tension: "Technical depth vs. business case in a 30-minute window"
+    resolution: "GP-06 resolves this: technical sections build credibility that makes business case sections land. They're complementary, not competing."
+
+cycle_created: 0
+cycle_modified: null

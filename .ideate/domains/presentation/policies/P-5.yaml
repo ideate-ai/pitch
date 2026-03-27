@@ -1,0 +1,11 @@
+id: P-5
+type: policy
+domain: "presentation"
+title: "Dual-Mode Slides"
+rule: "Each slide must work both as a presenter visual aid and as a standalone readable artifact. Enough text to convey the point; not enough to become a wall."
+derived_from: "GP-02 (Self-Contained but Presenter-Friendly)"
+established: planning phase
+status: active
+amended_by: null
+cycle_created: 0
+cycle_modified: null

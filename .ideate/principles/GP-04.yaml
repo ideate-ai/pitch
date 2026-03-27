@@ -1,0 +1,13 @@
+id: GP-04
+type: guiding_principle
+name: Tasteful Visual Polish
+status: active
+description: |
+  Use reveal.js features (auto-animate, fragments, code highlighting, KaTeX) to
+  create a polished, professional aesthetic. Dark theme throughout. Animations serve
+  comprehension (progressive disclosure of complex concepts like PPR) not decoration.
+  No gratuitous transitions, no spinning logos, no particle effects. Every visual
+  choice should feel intentional and understated.
+amendment_history: []
+cycle_created: 0
+cycle_modified: null

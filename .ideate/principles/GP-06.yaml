@@ -1,0 +1,13 @@
+id: GP-06
+type: guiding_principle
+name: Dual Audience Optimization
+status: active
+description: |
+  Engineering leaders care about technical depth and whether this is real engineering
+  or a wrapper. Thought leaders care about the paradigm shift and productivity
+  implications. Both audiences watch the same deck. Structure content so technical
+  sections build credibility that makes the business case sections land harder.
+  Neither audience should feel the deck is "not for them."
+amendment_history: []
+cycle_created: 0
+cycle_modified: null

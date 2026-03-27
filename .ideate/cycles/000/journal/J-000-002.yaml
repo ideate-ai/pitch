@@ -1,0 +1,10 @@
+id: J-000-002
+type: journal_entry
+cycle: 0
+seq: 2
+phase: plan
+date: "2026-03-26"
+summary: |
+  Domain bootstrap complete. Domains created: content, presentation. Initial policies: 5
+  (3 content, 2 presentation). Initial decisions: 5 (3 content, 2 presentation).
+  Open questions: 0. Cross-cutting concern noted: speaker notes span both domains.

@@ -1,0 +1,47 @@
+id: interview-plan-001
+type: interview
+cycle_created: 0
+phase: plan
+date: "2026-03-26"
+context: "User wants to build a reveal.js pitch deck for ideate, a Claude Code plugin that manages the full SDLC. The deck is for sharing the tool to drive adoption among engineering leaders and thought leaders."
+entries:
+  - id: IQ-plan-001-001
+    question: "What do you want to build?"
+    answer: "A reveal.js pitch deck for ideate. Should review the ideate codebase, LLM prompts, skills, and planning docs in .ideate/. The deck covers what ideate is, what problems it addresses, and how it works. Deep dive into knowledge graph and PPR for context retrieval. Explain PPR basics for engineers unfamiliar with the algorithm. Should be technically impressive and showcase engineering depth. Also show features for team collaboration — hook system for Jira/Slack integration, full SDLC management, fitting into existing process and tooling. 20-30 minute demo, persuasive pitch for engineers. Aesthetic, leveraging reveal.js eye candy features. Tasteful, not over the top."
+    domain: null
+    seq: 1
+  - id: IQ-plan-001-002
+    question: "Who is the specific audience for this demo? Is this for potential adopters evaluating ideate for their team, internal stakeholders deciding whether to invest further, conference attendees, or something else?"
+    answer: "This is a personal tool and the goal is to share it so more people use it. Engineering leaders are the primary audience, but thought leaders are also extremely important. The talk should mix technically impressive details with a compelling business case on why to use ideate."
+    domain: null
+    seq: 2
+  - id: IQ-plan-001-003
+    question: "Will this be presented live with a speaker talking over the slides, or does it need to be self-contained enough that someone could read through it without narration?"
+    answer: "Ideally both. User wants to talk over the slides, but anyone with the deck should understand it without effort."
+    domain: null
+    seq: 3
+  - id: IQ-plan-001-004
+    question: "PPR is extensively researched but not fully implemented yet. How should we frame this?"
+    answer: "PPR implementation is being worked on in parallel. By the time of presentation, PPR will be fully finished. Present it as a shipped, working feature."
+    domain: null
+    seq: 4
+  - id: IQ-plan-001-005
+    question: "Does ideate have branding — colors, logo, wordmark? Dark or light theme preference?"
+    answer: "No visual identity yet. Dark theme preferred."
+    domain: null
+    seq: 5
+  - id: IQ-plan-001-006
+    question: "What is the narrative hook — what pain point should the audience immediately recognize?"
+    answer: "The landscape today is built around planning and implementing features, not projects. Current AI tools are overly agreeable and won't critically analyze ideas. Ideate handles the full SDLC and will not blindly follow directions. Talk about guiding principles, decomposition, etc. Paint a vision of how developers can maximize productivity far beyond what AI assistants can do."
+    domain: null
+    seq: 6
+  - id: IQ-plan-001-007
+    question: "When you say demo, do you want a section where you live-demo ideate, or is demo used loosely to mean presentation with code snippets and diagrams embedded?"
+    answer: "No live demo — too slow. Snippets are good, as are tangible examples. Want to say how this slide deck was created with ideate. Also want to highlight how it has helped deliver real results."
+    domain: null
+    seq: 7
+  - id: IQ-plan-001-008
+    question: "How should PPR be framed given the risk of losing the audience?"
+    answer: "PPR is not an incremental improvement over existing tools. It incorporates hard academic science to make something significant. Frame it as the headline differentiator — academic rigor applied to a space full of heuristic hacks."
+    domain: null
+    seq: 8

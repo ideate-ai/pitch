@@ -1,0 +1,67 @@
+id: WI-013
+type: work_item
+title: "Layout and Readability: Column Layouts, Text Sizing, Overflow Fixes"
+status: pending
+complexity: medium
+scope:
+  - {path: "index.html", op: modify}
+depends: [012]
+blocks: []
+criteria:
+  - "Slide 11 (Guiding Principles) uses a two-column layout: code on one side, DDD text on the other [machine]"
+  - "Slide 13 (Decomposition) uses a two-column layout for better text distribution [machine]"
+  - "Slide 17 (brrr loop) — no text or numbers overflow below the visible slide area [human]"
+  - "Slide 33 (Hook System) — code and event list text are legible at 1920x1080 [human]"
+  - "No slide has a wide text box with narrow text creating excessive whitespace [human]"
+  - "All code blocks are readable at standard presentation resolution [human]"
+  - "Speaker notes timing markers are present on every slide including closing [machine]"
+module: null
+domain: presentation
+notes: |
+  # WI-013: Layout and Readability
+
+  ## Objective
+  Fix layout issues across slides where text is too small, boxes are too wide for
+  content, or content overflows the visible area.
+
+  ## Implementation Notes
+
+  ### Slide 11 — Guiding Principles Column Layout
+  Currently: code block spanning full width, then a highlight-box below.
+  Change to: two-column layout.
+  - Left column: the YAML code example
+  - Right column: the DDD/agile connection text
+  This uses the existing .two-column CSS class.
+
+  ### Slide 13 — Decomposition Column Layout
+  Currently: code block spanning full width, then a narrow text line below.
+  Change to: two-column layout.
+  - Left column: the YAML work item example
+  - Right column: explanation of [machine] vs [human] tags and what decomposition achieves
+
+  ### Slide 17 — brrr Loop Overflow
+  The stat-row with large numbers (59, 1161, 0) plus the text below it overflows.
+  Fix by:
+  - Reducing stat-number font-size on this specific slide (from 3.5em to 2.5em)
+  - Or moving the "ideate built itself" text into speaker notes
+  - Or reducing the convergence criteria highlight-box size
+
+  ### Slide 33 — Hook System Readability
+  The event type list and JSON code are too small. Options:
+  - Increase font size on the event list
+  - Use a simpler layout (list only, code in speaker notes)
+  - Reduce the JSON example to fewer lines
+
+  ### General Whitespace Audit
+  Walk every slide looking for the pattern: wide container div with short text lines.
+  The fix is usually one of:
+  - Add max-width to constrain the container
+  - Switch to two-column layout
+  - Reduce the container width
+
+  ### Speaker Notes Timing
+  Verify every slide has a ~Ns timing marker. The closing slide was identified as
+  missing one in cycle 002. Add ~30 seconds or similar.
+
+cycle_created: 2
+cycle_modified: null

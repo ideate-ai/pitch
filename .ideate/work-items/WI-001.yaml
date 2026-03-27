@@ -1,0 +1,73 @@
+id: WI-001
+type: work_item
+title: "Reveal.js Scaffold with Custom Dark Theme"
+status: pending
+complexity: medium
+scope:
+  - {path: "index.html", op: create}
+depends: []
+blocks: [002, 003, 004, 005, 006]
+criteria:
+  - "index.html exists with valid HTML5 doctype and reveal.js 5.x loaded via CDN [machine]"
+  - "KaTeX plugin loaded and rendering math notation correctly [machine]"
+  - "highlight.js plugin loaded with support for yaml, typescript, sql, and json languages [machine]"
+  - "Notes plugin loaded for speaker notes (press S to open presenter view) [machine]"
+  - "Custom CSS embedded in <style> block implementing the dark color palette from architecture (background #0a0a0f, surface #12121a, primary accent #6366f1, secondary accent #22d3ee) [machine]"
+  - "Typography uses Inter (Google Fonts CDN) for headings/body, JetBrains Mono for code [machine]"
+  - "Custom CSS classes defined: .accent, .accent-secondary, .two-column, .code-compact, .section-divider (gradient background), .stat-number (large metric display) [machine]"
+  - "At least one placeholder slide renders correctly when opened in browser [machine]"
+  - "Reveal.js configured with: hash navigation enabled, transition set to slide, auto-animate enabled, overview mode enabled [machine]"
+  - "Visual appearance is professional and polished — dark theme feels intentional, not default [human]"
+module: null
+domain: null
+notes: |
+  # WI-001: Reveal.js Scaffold with Custom Dark Theme
+
+  ## Objective
+  Create the HTML scaffold for the presentation with all CDN dependencies, plugins,
+  and a custom dark theme that establishes the visual identity for ideate.
+
+  ## Implementation Notes
+
+  ### CDN Dependencies
+  - reveal.js 5.x: core CSS + JS, plus plugins (notes, highlight, math, markdown)
+  - KaTeX: CSS + JS (used by reveal.js math plugin)
+  - Google Fonts: Inter (400, 600, 700) and JetBrains Mono (400)
+  - highlight.js: loaded as reveal.js plugin, no separate CDN needed
+
+  ### Custom Theme CSS
+  Build on top of reveal.js black theme. Override:
+  - `--r-background-color: #0a0a0f`
+  - `--r-main-color: #e2e8f0`
+  - `--r-heading-color: #e2e8f0`
+  - `--r-link-color: #6366f1`
+  - Custom accent classes using the color palette from architecture
+  - Code blocks: background #1e1e2e, border-radius, subtle border
+  - Section divider slides: gradient backgrounds using primary/secondary accents
+
+  ### Utility CSS Classes
+  - `.two-column`: CSS grid layout, 1fr 1fr, gap 2rem
+  - `.code-compact`: smaller font-size for dense code examples
+  - `.stat-number`: large bold number with accent color for metrics slides
+  - `.fragment-list`: list items that fade in sequentially
+  - `.graph-node`: circle elements for PPR graph diagrams
+  - `.graph-edge`: line elements for graph connections
+  - `.highlight-box`: subtle border + background for callouts
+
+  ### Reveal.js Configuration
+  ```javascript
+  Reveal.initialize({
+    hash: true,
+    transition: 'slide',
+    backgroundTransition: 'fade',
+    autoAnimateEasing: 'ease-in-out',
+    autoAnimateDuration: 0.8,
+    plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX]
+  });
+  ```
+
+  ### Placeholder Content
+  Include a title slide with "ideate" as the heading to verify everything renders.
+
+cycle_created: 0
+cycle_modified: null

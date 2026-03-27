@@ -1,0 +1,62 @@
+id: WI-007
+type: work_item
+title: "Critical Fixes: CTA, Offline Fallback, KaTeX, Code Readability, Presenter Info"
+status: pending
+complexity: medium
+scope:
+  - {path: "index.html", op: modify}
+depends: []
+blocks: [008, 009, 010]
+criteria:
+  - "Closing slide contains at least one actionable item: GitHub URL, install command, or contact method [machine]"
+  - "An onerror handler on the reveal.js script tag displays a visible warning if CDN fails to load [machine]"
+  - "At least 3 slides contain KaTeX-rendered math notation ($...$ or $$...$$) [machine]"
+  - "Title slide contains presenter name placeholder and date [machine]"
+  - "Code blocks use font-size >= 0.55em in default mode and >= 0.5em in code-compact mode [machine]"
+  - "Code blocks are legible at standard presentation resolution (1920x1080) [human]"
+module: null
+domain: presentation
+notes: |
+  # WI-007: Critical Fixes
+
+  ## Objective
+  Address the 3 critical findings and 2 significant findings from cycle 001 review
+  that are quick, isolated fixes.
+
+  ## Implementation Notes
+
+  ### CTA on Closing Slide (Critical - MR1)
+  Modify slide 38 (the final "Questions?" slide). Add:
+  - A GitHub-style install/try instruction or URL placeholder
+  - Keep it minimal — one line is enough. Example: "github.com/user/ideate" or
+    "Available as a Claude Code plugin"
+  - Do not add email or personal contact — keep it professional
+
+  ### Offline Fallback (Critical - EC1)
+  Add an onerror handler to the reveal.js core script tag. If it fails to load:
+  - Inject a visible div with a message: "This presentation requires an internet
+    connection to load dependencies. Please connect and refresh."
+  - Style it to be visible against the dark background
+  - This is a graceful degradation, not a full offline solution
+  - Example: <script onerror="document.body.innerHTML='<div style=...>message</div>'" src="...">
+
+  ### KaTeX on 3+ Slides (Critical - WI-004 criterion)
+  Currently only slide 22 ("The Math") has KaTeX. Add inline math notation to:
+  - PPR walkthrough slides: reference $\alpha$ and probability values like $\pi(v)$
+  - Edge-type weighting slide: add $w_{ij}$ notation for weights
+  - The "Personalized PageRank" slide: add $\alpha = 0.15$ inline
+
+  ### Presenter Name/Date (Significant - MR2)
+  Add to the title slide (slide 1):
+  - Placeholder: "[Your Name]" or similar
+  - Date: "2026" or "March 2026"
+  - Style: text-small dim class, below the tagline
+
+  ### Code Readability (New issue)
+  Increase base code font size:
+  - Change .reveal pre code font-size from 0.55em to 0.6em
+  - Change .code-compact pre code from 0.45em to 0.5em
+  - Verify code blocks are readable at presentation scale
+
+cycle_created: 1
+cycle_modified: null

@@ -1,0 +1,7 @@
+id: C-04
+type: constraint
+category: scope
+status: active
+description: "No live demo sections. All examples are static — code snippets, YAML excerpts, diagrams, and screenshots embedded in slides."
+cycle_created: 0
+cycle_modified: null

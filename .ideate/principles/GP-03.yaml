@@ -1,0 +1,12 @@
+id: GP-03
+type: guiding_principle
+name: Problem-First Narrative
+status: active
+description: |
+  Lead with the pain. The audience must recognize the problem before hearing about
+  the solution. Current AI tools are feature-level and agreeable. They plan features,
+  not projects. They don't critically analyze ideas. Frame ideate as the answer to a
+  problem the audience already feels, not as a technology looking for a use case.
+amendment_history: []
+cycle_created: 0
+cycle_modified: null

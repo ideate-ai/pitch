@@ -1,0 +1,107 @@
+id: WI-009
+type: work_item
+title: "Tone + Evolution Story + DDD Connections"
+status: pending
+complexity: high
+scope:
+  - {path: "index.html", op: modify}
+depends: [008]
+blocks: [010]
+criteria:
+  - "The 'Not Heuristics — Science' slide no longer reads as a mic-drop; facts are stated plainly without assertive framing [human]"
+  - "At least 4 'breadcrumb' moments from the evolution story are woven into speaker notes and/or slide content across Acts 1-6 [machine]"
+  - "HippoRAG is explained in one sentence (not just name-dropped) when first referenced [machine]"
+  - "Markov chains reference includes brief context (e.g., 'the mathematical framework behind random walks') [machine]"
+  - "The Guiding Principles slide connects to DDD bounded contexts or agile best practices explicitly [machine]"
+  - "A 'Spec Sufficiency' concept appears as its own slide linking to traditional software engineering practices [machine]"
+  - "The evolution journey (frustration → interview tool → cost wall → DDD insight → PPR research) is discernible across the deck [human]"
+  - "Overall tone reads as 'humble engineer showing what they built' not 'visionary founder selling a product' [human]"
+  - "No slides use language like 'mic-drop', 'the foundation scales, the heuristics plateau', or other assertive marketing phrases [machine]"
+module: null
+domain: content
+notes: |
+  # WI-009: Tone + Evolution Story + DDD Connections
+
+  ## Objective
+  Rewrite assertive slides to be humbler, weave the evolution story throughout as
+  narrative breadcrumbs, connect guiding principles to DDD/agile, and add context
+  to name-dropped references.
+
+  ## Implementation Notes
+
+  ### Tone Adjustments
+  The research recommends the "debugging narrative" archetype: an engineer who was
+  annoyed by something and stubborn enough to keep going. Key techniques:
+
+  - Let numbers talk instead of making claims. Replace "The foundation scales.
+    The heuristics plateau." with the actual comparison data.
+  - Use "I think" framing for big claims: "I think the context problem is the
+    problem in AI-assisted development" not "This IS the problem."
+  - End sections on the result, not on rhetoric.
+
+  Specific slides to adjust:
+  1. Slide 28 ("Not Heuristics — Science"): Replace assertive framing with honest
+     statement of what the approach is grounded in. Remove the "mic-drop" feel.
+     Example: "This approach is grounded in graph theory — Markov chains (the
+     mathematical framework behind random walks on graphs), stationary distributions,
+     and spectral methods. Published and validated at NeurIPS 2024 by the HippoRAG
+     team, who showed PPR-based retrieval matches iterative methods at 10-20x lower
+     cost."
+  2. Slide 7 (Introducing ideate): Soften "with the rigor of a senior engineer" —
+     try "that tries to bring engineering rigor to the full development lifecycle"
+  3. Slide 37 (Future of Development): Less "the trajectory is clear" — more
+     "I think this is where things are heading"
+
+  ### Evolution Story Breadcrumbs
+  Weave the journey into speaker notes and select slide text. The story is:
+  1. Frustration → plan mode could only handle single features
+  2. Built reverse-prompting interview tool → worked but insanely expensive
+  3. Quality gates were overwhelming → evaluating all prior decisions
+  4. Introduced DDD bounded contexts → solved scope, introduced retrieval problem
+  5. Serious research → PPR from graph theory
+  6. Current state → it works
+
+  Placement (from storytelling research):
+  - Breadcrumb 1 (Title/opening speaker notes): "I built this because I was frustrated..."
+  - Breadcrumb 2 (Planning slide, speaker notes): "The interview approach came from
+    my first attempt — a reverse-prompting tool that worked but couldn't scale"
+  - Breadcrumb 3 (Domain Knowledge slide, speaker notes + slide text): "Domain-driven
+    design solved the scope problem. I was reading Evans and realized this was a
+    bounded context issue, not an AI issue."
+  - Breadcrumb 4 (Context Problem slide, speaker notes): "Bounded contexts solved
+    scope but introduced the retrieval problem. Which context matters? That's what
+    drove me to PPR."
+  - Breadcrumb 5 (Metrics slide, speaker notes): "Cost was the forcing function.
+    When your API bill makes you rethink everything, you either quit or do the math."
+  - Breadcrumb 6 (Dogfooding reveal, keep as-is): The payoff.
+
+  ### DDD / Agile Connections
+  On the Guiding Principles slide (or a new Spec Sufficiency slide):
+  - Connect spec sufficiency to acceptance criteria in agile/XP
+  - Connect domain knowledge layer to DDD bounded contexts explicitly
+  - Connect the review cycle to continuous improvement / retrospectives
+  - Frame: "These aren't new ideas. They're established software engineering
+    practices — DDD, agile, continuous improvement — applied to AI workflows."
+  - This gives engineering leaders familiar anchors
+
+  ### Spec Sufficiency Standalone Slide (Significant - II2)
+  Add between Guiding Principles and Decomposition:
+  - Title: "Spec Sufficiency"
+  - The bar: "Two independent LLMs, same spec, equivalent output"
+  - Connect to agile: "Like acceptance criteria in XP — but for the AI's instructions"
+  - What it means in practice: every file path, function signature, error case specified
+  - Fragment build showing the specificity ladder
+
+  ### HippoRAG Context (New issue)
+  When first mentioned (slide 27, "vs. Naive Retrieval"):
+  - Change from just "HippoRAG (NeurIPS 2024)" to "HippoRAG, a NeurIPS 2024 paper
+    that applied PPR to knowledge graph retrieval, showed..."
+  - One sentence of context transforms a name-drop into a credibility signal
+
+  ### Markov Chains Context (New issue)
+  On slide 28:
+  - Change from bare "Markov chains, stationary distributions" to include brief
+    parenthetical: "Markov chains (the math behind random walks on graphs)"
+
+cycle_created: 1
+cycle_modified: null

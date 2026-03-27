@@ -1,0 +1,71 @@
+id: WI-008
+type: work_item
+title: "PPR Section Fixes: Graph Edges, 4th Step, 'From Web to Knowledge' Slide"
+status: pending
+complexity: high
+scope:
+  - {path: "index.html", op: modify}
+depends: [007]
+blocks: [009]
+criteria:
+  - "SVG or CSS lines connect graph nodes showing edges between them in all 4 PPR walkthrough slides [machine]"
+  - "Edge labels or tooltips indicate edge types (depends_on, belongs_to, governed_by) [human]"
+  - "PPR walkthrough has 4 vertical sub-slides (steps 1-4) instead of 3 [machine]"
+  - "Step 4 shows a distinct 'selected for context' visual (e.g., checkmark, ring, or highlight border) on top-scoring nodes [human]"
+  - "Graph nodes display probability scores (e.g., 0.35, 0.12) on steps 3 and 4 to make the example concrete [machine]"
+  - "Each walkthrough step has complete speaker notes explaining what is happening and why [machine]"
+  - "A 'From Web to Knowledge' slide exists between PageRank and Personalized PageRank slides [machine]"
+  - "The PPR section divider reads 'The Science — PPR Deep Dive' (not just 'The Science') [machine]"
+module: null
+domain: content
+notes: |
+  # WI-008: PPR Section Fixes
+
+  ## Objective
+  Fix the PPR deep dive section to match the architecture spec: add graph edges,
+  restore the 4th walkthrough step, and add the missing transition slide.
+
+  ## Implementation Notes
+
+  ### Graph Edges (Significant - EC3)
+  The .graph-edge CSS class exists but no elements are instantiated. Add SVG lines
+  or positioned divs connecting the nodes:
+  - WI-042 → auth (belongs_to)
+  - WI-042 → WI-041 (depends_on)
+  - auth → P-07 (governed_by)
+  - auth → P-01 (governed_by)
+  - P-07 → GP-01 (derived_from)
+  - auth → RF-auth (informed_by)
+
+  Use inline SVG with <line> elements inside the graph-container. SVG overlays scale
+  correctly with auto-animate. Use stroke colors that match the node heat state:
+  - Active edges: rgba(99, 102, 241, 0.5)
+  - Cold edges: rgba(148, 163, 184, 0.15)
+
+  Edge labels can be small text along the line or omitted if too cluttered — the
+  edge-type weighting table on the next slide covers the types.
+
+  ### 4th Walkthrough Step (Significant - D5)
+  Currently steps 3 and 4 are merged. Split into:
+  - Step 3: "After several iterations — heat map emerges" (intermediate state)
+  - Step 4: "Converged — top nodes selected for context" (final selection)
+
+  On step 4, add a visual selection indicator: a bright border ring or checkmark
+  on the top-5 nodes (WI-042, auth, P-07, WI-041, P-01). Dim or partially hide
+  unselected nodes (GP-01, RF-auth, WI-099).
+
+  ### "From Web to Knowledge" Slide (Significant - D2)
+  Add a slide between "PageRank — The Original Insight" and "Personalized PageRank":
+  - Title: "From Web to Knowledge"
+  - Content: "The same math works for any graph"
+  - Show the mapping: Web pages → SDLC artifacts, Hyperlinks → dependency/governance edges
+  - Two-column comparison or simple transformation visual
+  - "Which artifacts are most important for THIS task?"
+  - Transition: "But standard PageRank gives global importance. We need local relevance."
+  - Speaker notes: ~45 seconds
+
+  ### Section Divider Title (Minor - N3)
+  Change the Act 4 section divider h2 from "The Science" to "The Science — PPR Deep Dive"
+
+cycle_created: 1
+cycle_modified: null

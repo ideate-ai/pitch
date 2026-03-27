@@ -1,0 +1,90 @@
+id: WI-012
+type: work_item
+title: "Copy Rewrite: Tone, PPR Language, Slide-by-Slide Fixes"
+status: pending
+complexity: high
+scope:
+  - {path: "index.html", op: modify}
+depends: [011]
+blocks: [013]
+criteria:
+  - "No slide title uses marketing-style language (Supercharged, Revolution, etc.) [human]"
+  - "PPR explanation uses plain language — no 'random surfer' jargon without plain-language equivalent [human]"
+  - "The PPR math slide anchors the formula around 'relevance scoring' not 'time the surfer spends' [human]"
+  - "Slide 10 (Planning) conveys 'filling gaps to reduce hallucinations' not 'trigger words' [human]"
+  - "Slide 15 (Review) explains persona-specific context advantage, not just 'not a rubber stamp' [human]"
+  - "Slide 18 (Context Problem) clearly conveys scaling with limited context windows [human]"
+  - "Slide 20 (Knowledge Graph) plainly states what it is and what it accomplishes [human]"
+  - "Slide 22 PPR edges use domain-relevant terms (not 'governed_by') [machine]"
+  - "Slide 31 (Foundations) does not contain 'I think this matters' [machine]"
+  - "'I think this matters' or similar weak qualifiers do not appear [machine]"
+  - "All speaker notes with BREADCRUMB markers maintain evolution story coherence after structural changes [human]"
+module: null
+domain: content
+notes: |
+  # WI-012: Copy Rewrite
+
+  ## Objective
+  Rewrite copy across all affected slides to match the "humble engineer" tone and
+  ground the PPR explanation in plain language anchored to relevance.
+
+  ## Implementation Notes
+
+  ### PPR Language Overhaul
+  Throughout the PPR section, replace graph theory jargon with plain equivalents:
+  - "random surfer" → "imagine following links at random from your starting point"
+    or "random walk" with immediate explanation
+  - "stationary distribution" → "the scores that emerge when the walk stabilizes"
+  - "teleportation" → "jumping back to the starting point"
+  - Anchor the math around: "which artifacts are most relevant to this task?"
+    not "where does the surfer spend time?"
+  - The formula explanation should say: "π tells us the relevance score for every
+    node" not "where the surfer spends time"
+
+  ### Slide 10 — Planning
+  - Title: something like "Filling the Gaps" or "Reducing Ambiguity"
+  - Not "trigger words" — frame as: "ideate identifies what you haven't specified
+    and asks you to be explicit. This reduces hallucination because the AI doesn't
+    have to guess."
+  - Keep the example interaction (handle errors → what specific errors?) but frame
+    it as gap-filling, not pattern matching
+
+  ### Slide 15 — Review
+  - Replace "Three perspectives. Not a rubber stamp." with something like
+    "Each reviewer has a focused scope and specialized context"
+  - Explain WHY multiple perspectives matter: each persona can hold more relevant
+    context because it's scoped (code quality vs. spec adherence vs. gap analysis)
+  - This connects to the context problem — even reviewers benefit from focused context
+
+  ### Slide 18 — Context Problem
+  - Title should convey the scaling challenge: "The Context Problem" is fine but
+    subtitle should be something like "Context windows are finite. Projects aren't."
+  - Remove or rewrite the bold subtitle
+
+  ### Slide 20 — Knowledge Graph
+  - Instead of "A Knowledge Graph / Every artifact is a node. Every relationship
+    is an edge." try: "How ideate organizes project knowledge" and explain what
+    the graph lets you DO (find relevant artifacts, trace dependencies, discover
+    which policies apply to a task)
+
+  ### Slide 22 — Edge types in PPR walkthrough
+  - Replace "governed_by" labels with more intuitive terms like "uses" or
+    "relates_to" or domain-relevant labels that don't sound like an ORM
+
+  ### Slide 31 — Foundations
+  - Remove "I think this matters because" — replace with a concrete statement
+    about what principled retrieval enables (e.g., "Principled retrieval means
+    context quality doesn't degrade as the project grows")
+
+  ### Slide 33 — Hook System
+  - Text too small to read. Increase font or restructure layout.
+
+  ### Holistic Tone Pass
+  Read through every slide and speaker note. Look for:
+  - Phrases that sound like a pitch ("revolutionary", "supercharged", "game-changing")
+  - Claims without evidence (replace with data or remove)
+  - Weak hedging ("I think", "I believe") — either commit to the statement or
+    reframe as evidence ("The data shows", "In practice")
+
+cycle_created: 2
+cycle_modified: null

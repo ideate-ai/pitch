@@ -1,0 +1,95 @@
+id: WI-010
+type: work_item
+title: "Content Gaps, CSS Polish, Ownership Notes, Speaker Notes Audit"
+status: pending
+complexity: medium
+scope:
+  - {path: "index.html", op: modify}
+depends: [009]
+blocks: []
+criteria:
+  - "A 'Your Process, Supercharged' content slide exists with a diagram showing ideate alongside Git/CI/Jira/Slack [machine]"
+  - "Auto-animate on SDLC loop either works (paired slides) or the attribute is removed [machine]"
+  - "Section-divider CSS class includes a gradient background property [machine]"
+  - "Act 2 section divider uses class='section-divider' consistently with other acts [machine]"
+  - "Every slide has complete speaker notes with timing guidance [machine]"
+  - "Speaker notes include evolution story breadcrumbs on at least 4 slides [machine]"
+  - "Closing slide speaker notes contain ownership framing guidance (positive, transparent, no legal language) [human]"
+  - "The 'This Deck' slide speaker notes contain ownership context for internal presentations [human]"
+  - "Overall slide count remains between 30 and 45 [machine]"
+  - "The complete deck opens correctly in a browser with no console errors (CDN available) [machine]"
+module: null
+domain: presentation
+notes: |
+  # WI-010: Content Gaps + CSS Polish + Ownership Notes + Speaker Notes Audit
+
+  ## Objective
+  Fix remaining significant/minor findings from review, add ownership framing in
+  speaker notes, and do a complete speaker notes audit.
+
+  ## Implementation Notes
+
+  ### "Your Process, Supercharged" Diagram (Significant - II1)
+  The current slide 29 is a 5-second section divider. Convert to a content slide:
+  - Keep the gradient background
+  - Add a CSS-drawn diagram: ideate in the center with connections to:
+    - Git (version control — ideate manages branches/worktrees)
+    - CI/CD (testing — ideate runs your test suite during review)
+    - Jira (planning — ideate syncs via hooks)
+    - Slack (communication — ideate notifies via hooks)
+  - Use .flow-box styling for each tool, with lines/arrows to ideate
+  - Message: "ideate doesn't replace your workflow. It connects to it."
+  - Speaker notes: ~60 seconds
+
+  ### Auto-Animate SDLC Fix (Significant - EC2)
+  Two options:
+  a) Add a paired slide before the SDLC loop: first slide shows just "Plan" box,
+     second slide morphs to show the full loop. Use data-id attributes on flow-boxes.
+  b) Remove the data-auto-animate attribute since fragments work fine.
+  Recommend option (a) for visual impact, but (b) is acceptable if slide count is tight.
+
+  ### CSS Fixes (Minor)
+  1. .section-divider: add `background: linear-gradient(...)` to the CSS class itself
+  2. Act 2 divider (slide 6): add class="section-divider"
+  3. .fragment-list: define the class (ul with fragment children, auto-indexed)
+
+  ### Ownership Speaker Notes (New issue #4)
+  Add to the "This Deck" slide (slide 35) and closing slide (slide 38) speaker notes.
+
+  Frame for the "This Deck" slide notes:
+  "For internal context: I started ideate as a personal project on my own time and
+  resources. I've been careful to maintain clear boundaries — the work implementation
+  was built independently using architectural insights, not shared code. I'm at the
+  point where maintaining parallel versions isn't sustainable engineering. I'd like
+  us to evaluate the open-source version on its merits and discuss adoption. This
+  benefits the team: community contributions, transparency, and a more mature
+  implementation. I want to be fully transparent about this history."
+
+  Frame for the closing slide notes:
+  "If presenting internally: The ask is simple — evaluate ideate on its engineering
+  merits. I believe the data speaks for itself. I've invested in this because I think
+  the context retrieval problem is real and important, and I'd love to bring this
+  capability to the team properly."
+
+  Key principles from research:
+  - Lead with value to the organization, not personal ownership
+  - Use "I want to be transparent" framing
+  - Frame the ask as "evaluate on merits" not "adopt my thing"
+  - No legal language, no "fair/fairness", no "I deserve"
+  - Tone: trustworthy, low-risk opportunity, responsible boundaries
+
+  ### Speaker Notes Audit
+  Walk every slide. For each, verify:
+  - Notes exist and contain talking points
+  - Timing guidance present (~Ns format)
+  - Evolution breadcrumbs placed on appropriate slides (see WI-009)
+  - Transition cues to next slide
+  - No placeholder or incomplete notes
+
+  ### Minor CSS/HTML Fixes
+  - TypeScript/SQL language classes: add at least one TypeScript code example
+    (e.g., a snippet of the MCP artifact server) — this also adds technical depth
+  - PPR section divider title: ensure full title "The Science — PPR Deep Dive"
+
+cycle_created: 1
+cycle_modified: null

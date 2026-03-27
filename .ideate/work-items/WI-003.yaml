@@ -1,0 +1,109 @@
+id: WI-003
+type: work_item
+title: "Act 3: How It Works — SDLC Deep Dive Slides"
+status: pending
+complexity: high
+scope:
+  - {path: "index.html", op: modify}
+depends: [002]
+blocks: [004]
+criteria:
+  - "8 slides for Act 3 present in the deck following Act 2 [machine]"
+  - "Planning slide shows active ambiguity hunting with actual trigger words from ideate's skill prompt [machine]"
+  - "Guiding Principles slide includes a real YAML example from ideate's own GP-01 (Spec Sufficiency) [machine]"
+  - "Decomposition slide shows a work item YAML example with [machine] and [human] acceptance criteria tags [machine]"
+  - "Agent slide lists all 9 specialized agents with one-line role descriptions [machine]"
+  - "Review slide shows the multi-perspective pattern (code-reviewer, spec-reviewer, gap-analyst running in parallel) [human]"
+  - "Domain Knowledge slide shows the policies → decisions → questions structure [human]"
+  - "brrr loop slide shows convergence criteria (zero critical + zero significant findings + principle adherence) [machine]"
+  - "Code/YAML examples are syntax-highlighted and use line-by-line fragment reveal where appropriate [machine]"
+  - "Speaker notes present on every slide with talking points and timing (~1 min per slide) [machine]"
+  - "Content is accurate to ideate's actual implementation — no invented features [human]"
+module: null
+domain: null
+notes: |
+  # WI-003: Act 3 — How It Works
+
+  ## Objective
+  Create 8 slides walking through ideate's SDLC phases with concrete examples
+  from the actual codebase. This is the meat of the "how" — after the audience
+  knows the problem and the vision, show them the mechanism.
+
+  ## Implementation Notes
+
+  ### Slide 9: Planning That Interrogates
+  - Show ideate's active ambiguity hunting
+  - Left side: list of trigger words ("appropriate", "clean", "as needed", "handle errors",
+    "good performance", "user-friendly", "secure", "scalable")
+  - Right side: example interaction where ideate pushes back
+  - User: "It should handle errors appropriately"
+  - ideate: "What specific errors can occur? For each: retry, log, alert, fail silently, or propagate?"
+  - Fragment reveal the trigger words, then the example
+
+  ### Slide 10: Guiding Principles
+  - Real YAML from ideate's own GP-01:
+    ```yaml
+    id: GP-01
+    name: Spec Sufficiency
+    description: |
+      Plans are complete only when any reasonable
+      question can be answered from specs alone.
+      Two independent LLMs given the same spec
+      would produce functionally equivalent output.
+    ```
+  - Explain: "These aren't instructions. They're a decision framework."
+  - Fragment: show how a principle resolves a question without asking the user
+
+  ### Slide 11: Spec Sufficiency
+  - The core bar: "Two independent LLMs, same spec, equivalent output"
+  - Show what this means in practice:
+    - Every file path specified
+    - Every function signature defined
+    - Every error case handled
+    - Every acceptance criterion tagged [machine] or [human]
+  - This is what separates ideate from "just use an AI to code"
+
+  ### Slide 12: Decomposition
+  - Show a real work item YAML with acceptance criteria
+  - Highlight the [machine] and [human] tags
+  - Show file scope (create/modify/delete)
+  - Show dependency DAG (WI-001 → WI-002 → WI-003)
+  - Explain: "Non-overlapping file scopes. No two concurrent items touch the same file."
+
+  ### Slide 13: 9 Specialized Agents
+  - Grid or list layout showing all 9 agents:
+    - architect (design), researcher (investigate), decomposer (break down)
+    - code-reviewer (quality), spec-reviewer (adherence), gap-analyst (missing)
+    - domain-curator (knowledge), journal-keeper (history), proxy-human (autonomous decisions)
+  - Each with a one-line role and an icon/emoji
+  - Fragment reveal in groups: planning agents, review agents, knowledge agents
+
+  ### Slide 14: Critical Review
+  - Three reviewers running in parallel (diagram):
+    - code-reviewer: correctness, security, quality
+    - spec-reviewer: architecture adherence, principle compliance
+    - gap-analyst: missing requirements, edge cases, infrastructure
+  - Then journal-keeper synthesizes across all three
+  - Then domain-curator distills into policies/decisions/questions
+  - "Not a rubber stamp. A structured interrogation of your code."
+
+  ### Slide 15: Domain Knowledge Layer
+  - Three-part structure: Policies | Decisions | Questions
+  - Policies: "Durable rules future workers must follow"
+  - Decisions: "Choices with rationale and citations"
+  - Questions: "Open issues with impact assessment"
+  - Show the accumulation: cycle 1 → cycle 5 → cycle 15 → growing policy set
+  - "The system gets smarter with every cycle"
+
+  ### Slide 16: The brrr Loop
+  - Diagram: Execute → Review → Check Convergence → Refine → Execute...
+  - Convergence criteria highlighted:
+    - Zero critical findings
+    - Zero significant findings
+    - All guiding principles satisfied
+  - "Autonomous operation. No human in the loop until convergence."
+  - proxy-human agent handles Andon events
+  - Show real stat: "ideate built itself through 59 cycles"
+
+cycle_created: 0
+cycle_modified: null

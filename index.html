@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ideate — AI That Manages Projects, Not Just Tasks</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Reveal.js Core -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+
+  <!-- Code Highlighting Theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/monokai.css">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <style>
+    /* ============================================
+       IDEATE CUSTOM THEME
+       ============================================ */
+
+    :root {
+      /* Core Palette */
+      --r-background-color: #0a0a0f;
+      --r-main-color: #e2e8f0;
+      --r-heading-color: #f1f5f9;
+      --r-link-color: #6366f1;
+      --r-link-color-hover: #818cf8;
+      --r-selection-background-color: rgba(99, 102, 241, 0.3);
+      --r-selection-color: #fff;
+
+      /* Typography */
+      --r-main-font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      --r-heading-font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      --r-code-font: 'JetBrains Mono', 'Fira Code', monospace;
+      --r-main-font-size: 36px;
+      --r-heading-font-weight: 700;
+      --r-heading-letter-spacing: -0.02em;
+      --r-heading1-size: 2.4em;
+      --r-heading2-size: 1.6em;
+      --r-heading3-size: 1.2em;
+
+      /* Ideate Palette */
+      --ideate-bg: #0a0a0f;
+      --ideate-surface: #12121a;
+      --ideate-primary: #6366f1;
+      --ideate-secondary: #22d3ee;
+      --ideate-text: #e2e8f0;
+      --ideate-text-dim: #94a3b8;
+      --ideate-code-bg: #1e1e2e;
+      --ideate-success: #10b981;
+      --ideate-warning: #f59e0b;
+      --ideate-danger: #ef4444;
+    }
+
+    /* Background gradient for depth */
+    .reveal {
+      background: radial-gradient(ellipse at 50% 30%, #111127 0%, #0a0a0f 65%);
+    }
+
+    /* Slide spacing */
+    .reveal .slides section {
+      line-height: 1.5;
+    }
+
+    .reveal .slides section h2 {
+      margin-bottom: 0.6em;
+    }
+
+    .reveal .slides section h3 {
+      margin-bottom: 0.5em;
+    }
+
+    /* Paragraph spacing */
+    .reveal p {
+      margin: 0.4em 0;
+    }
+
+    /* List styling */
+    .reveal ul, .reveal ol {
+      margin-left: 0.5em;
+    }
+
+    .reveal li {
+      margin-bottom: 0.3em;
+      color: var(--ideate-text);
+    }
+
+    .reveal li::marker {
+      color: var(--ideate-primary);
+    }
+
+    /* ============================================
+       ACCENT CLASSES
+       ============================================ */
+
+    .accent { color: var(--ideate-primary); }
+    .accent-secondary { color: var(--ideate-secondary); }
+    .accent-success { color: var(--ideate-success); }
+    .accent-warning { color: var(--ideate-warning); }
+    .accent-danger { color: var(--ideate-danger); }
+    .dim { color: var(--ideate-text-dim); }
+
+    .accent-bold {
+      color: var(--ideate-primary);
+      font-weight: 700;
+    }
+
+    /* ============================================
+       LAYOUT CLASSES
+       ============================================ */
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      text-align: left;
+      align-items: start;
+    }
+
+    .two-column.narrow-wide {
+      grid-template-columns: 2fr 3fr;
+    }
+
+    .two-column.wide-narrow {
+      grid-template-columns: 3fr 2fr;
+    }
+
+    .three-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    /* ============================================
+       CODE STYLING
+       ============================================ */
+
+    .reveal pre {
+      width: 100%;
+      box-shadow: none;
+    }
+
+    .reveal pre code {
+      background: var(--ideate-code-bg);
+      border: 1px solid rgba(99, 102, 241, 0.15);
+      border-radius: 8px;
+      padding: 1em;
+      font-size: 1em;
+      line-height: 1.5;
+      max-height: 500px;
+    }
+
+    .code-compact pre code {
+      font-size: 1em;
+      padding: 0.7em;
+    }
+
+    .reveal code:not(pre code) {
+      background: var(--ideate-code-bg);
+      border-radius: 4px;
+      padding: 0.15em 0.4em;
+      font-size: 0.85em;
+      color: var(--ideate-secondary);
+    }
+
+    /* ============================================
+       SECTION DIVIDERS
+       ============================================ */
+
+    .section-divider {
+      text-align: center;
+    }
+
+    .section-divider h2 {
+      font-size: 2em;
+      letter-spacing: -0.03em;
+    }
+
+    /* ============================================
+       STAT / METRIC DISPLAY
+       ============================================ */
+
+    .stat-number {
+      font-size: 3.5em;
+      font-weight: 700;
+      color: var(--ideate-primary);
+      line-height: 1.1;
+      margin: 0.1em 0;
+    }
+
+    .stat-number.secondary {
+      color: var(--ideate-secondary);
+    }
+
+    .stat-number.success {
+      color: var(--ideate-success);
+    }
+
+    .stat-label {
+      font-size: 0.65em;
+      color: var(--ideate-text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.3em;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    /* ============================================
+       HIGHLIGHT BOX / CALLOUT
+       ============================================ */
+
+    .highlight-box {
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 8px;
+      padding: 1em 1.5em;
+      margin: 0.8em 0;
+      text-align: left;
+    }
+
+    .highlight-box.secondary {
+      background: rgba(34, 211, 238, 0.06);
+      border-color: rgba(34, 211, 238, 0.2);
+    }
+
+    .highlight-box.success {
+      background: rgba(16, 185, 129, 0.06);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .highlight-box.warning {
+      background: rgba(245, 158, 11, 0.06);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    /* ============================================
+       GRAPH DIAGRAM ELEMENTS (PPR section)
+       ============================================ */
+
+    .graph-container {
+      position: relative;
+      width: 800px;
+      height: 450px;
+      margin: 0 auto;
+    }
+
+    .graph-node {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.45em;
+      font-weight: 600;
+      border: 2px solid var(--ideate-primary);
+      background: var(--ideate-surface);
+      color: var(--ideate-text);
+      transition: all 0.8s ease;
+      z-index: 2;
+    }
+
+    .graph-node.seed {
+      border-color: var(--ideate-secondary);
+      background: rgba(34, 211, 238, 0.15);
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+    }
+
+    .graph-node.hot {
+      border-color: var(--ideate-primary);
+      background: rgba(99, 102, 241, 0.2);
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+    }
+
+    .graph-node.warm {
+      border-color: rgba(99, 102, 241, 0.5);
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    .graph-node.cold {
+      border-color: rgba(148, 163, 184, 0.3);
+      background: rgba(148, 163, 184, 0.05);
+      color: var(--ideate-text-dim);
+    }
+
+
+    /* ============================================
+       COMPARISON TABLE
+       ============================================ */
+
+    .reveal table {
+      border-collapse: collapse;
+      margin: 0.8em auto;
+      font-size: 0.65em;
+    }
+
+    .reveal table th {
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--ideate-primary);
+      padding: 0.6em 1em;
+      border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .reveal table td {
+      padding: 0.5em 1em;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      color: var(--ideate-text);
+    }
+
+    .reveal table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ============================================
+       FLOW DIAGRAM (CSS-based)
+       ============================================ */
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .flow-box {
+      background: var(--ideate-surface);
+      border: 2px solid var(--ideate-primary);
+      border-radius: 8px;
+      padding: 0.5em 1em;
+      font-size: 0.75em;
+      font-weight: 600;
+      color: var(--ideate-text);
+    }
+
+    .flow-box.active {
+      background: rgba(99, 102, 241, 0.15);
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+    }
+
+    .flow-arrow {
+      color: var(--ideate-primary);
+      font-size: 1.2em;
+    }
+
+    /* ============================================
+       CHAT EXAMPLE (for yes-machine slide)
+       ============================================ */
+
+    .chat-bubble {
+      background: var(--ideate-surface);
+      border-radius: 12px;
+      padding: 0.8em 1.2em;
+      margin: 0.5em 0;
+      text-align: left;
+      font-size: 0.65em;
+      line-height: 1.4;
+      max-width: 85%;
+    }
+
+    .chat-bubble.user {
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .chat-bubble.ai-bad {
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      background: rgba(239, 68, 68, 0.05);
+    }
+
+    .chat-bubble.ai-good {
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .chat-label {
+      font-size: 0.75em;
+      font-weight: 600;
+      margin-bottom: 0.3em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================
+       AGENT GRID
+       ============================================ */
+
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 0.8em 0;
+    }
+
+    .agent-card {
+      background: var(--ideate-surface);
+      border: 1px solid rgba(99, 102, 241, 0.15);
+      border-radius: 8px;
+      padding: 0.8em;
+      text-align: center;
+      font-size: 0.5em;
+    }
+
+    .agent-card .agent-icon {
+      font-size: 1.8em;
+      margin-bottom: 0.3em;
+    }
+
+    .agent-card .agent-name {
+      font-weight: 600;
+      color: var(--ideate-primary);
+      margin-bottom: 0.2em;
+    }
+
+    .agent-card .agent-role {
+      color: var(--ideate-text-dim);
+      font-size: 0.9em;
+    }
+
+    /* ============================================
+       MISC UTILITIES
+       ============================================ */
+
+    .text-left { text-align: left; }
+    .text-center { text-align: center; }
+    .text-small { font-size: 0.7em; }
+    .text-xs { font-size: 0.55em; }
+    .mt-1 { margin-top: 0.5em; }
+    .mt-2 { margin-top: 1em; }
+    .mb-1 { margin-bottom: 0.5em; }
+
+    .reveal .slides section .fragment.visible.fade-in-then-semi-out.current-fragment {
+      opacity: 1;
+    }
+
+    /* Subtle separator line */
+    .separator {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--ideate-primary), var(--ideate-secondary));
+      margin: 1em auto;
+      border-radius: 2px;
+    }
+
+    /* Title slide special styling */
+    .title-ideate {
+      font-size: 4em;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--ideate-primary), var(--ideate-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ============================================
+           ACT 1: THE PROBLEM
+           ============================================ -->
+
+      <!-- Slide 1: Title -->
+      <section>
+        <div class="title-ideate">ideate</div>
+        <div class="separator"></div>
+        <p class="text-small dim mt-2">A Claude Code Plugin for Full SDLC Management</p>
+        <p class="text-xs dim mt-2">Dan Singer · March 2026</p>
+        <aside class="notes">
+          ~15 seconds. Let the title breathe. "I want to show you something I've been
+          building. It started as a personal frustration and turned into a tool I think
+          could change how we work."
+        </aside>
+      </section>
+
+      <!-- Slide 2: The Upper Bound -->
+      <section>
+        <h2>Capable, But Limited</h2>
+        <div style="font-size: 0.85em; text-align: left; max-width: 700px; margin: 0 auto;">
+          <p class="fragment fade-in-then-semi-out">
+            AI coding tools are <strong class="accent">capable pair programming partners</strong> for individual tasks — generate a function, fix a bug, refactor a file.
+          </p>
+          <p class="fragment fade-in-then-semi-out mt-1">
+            But they hit a <strong class="accent-warning">very low upper bound on task size</strong>. Anything spanning multiple modules, multiple sessions, or architectural decisions falls apart.
+          </p>
+          <p class="fragment fade-in-then-semi-out mt-1">
+            I built <strong>skills and agents</strong> to address overagreeability, which improved code quality — but did nothing to address <em>how much work</em> they could take on.
+          </p>
+          <p class="fragment fade-in mt-1 dim">
+            The tools are good. The scope they can handle is the bottleneck.
+          </p>
+        </div>
+        <aside class="notes">
+          ~75 seconds. "AI coding tools are genuinely good pair programming partners for
+          individual tasks. But they hit a wall on anything larger. I built skills and
+          agents to address the overagreeability problem — the tendency to just agree with
+          whatever you ask — and that improved code quality. But it didn't help with scale.
+          The ceiling on task size stayed the same."
+
+          BREADCRUMB 1: "I was using these tools on a real codebase — not a todo app, a
+          production system. And I kept hitting the same wall: they could write a function,
+          but they couldn't understand a project."
+        </aside>
+      </section>
+
+      <!-- Slide 4: The Yes-Machine Problem -->
+      <section>
+        <h2>The Yes-Machine Problem</h2>
+        <div style="max-width: 750px; margin: 0 auto;">
+          <div class="chat-bubble user">
+            <div class="chat-label dim">Developer</div>
+            Let's skip input validation — we can add it later.
+            Just store the raw user input directly.
+          </div>
+          <div class="chat-bubble ai-bad fragment">
+            <div class="chat-label accent-danger">Typical AI Assistant</div>
+            Sure! Here's how to store raw input directly in the database... 👍
+          </div>
+          <div class="chat-bubble ai-good fragment">
+            <div class="chat-label accent-success">ideate</div>
+            This violates <strong>C-04: Input Validation at System Boundaries</strong>.
+            Raw input storage creates SQL injection and XSS vectors.
+            What specific validation can you defer vs. what must exist at the boundary?
+          </div>
+        </div>
+        <aside class="notes">
+          ~75 seconds. "This is what I call the Yes-Machine Problem. Today's AI tools are
+          designed to be helpful, which means agreeable. They'll implement whatever you ask —
+          even if it's a bad idea. ideate doesn't do that. It has guiding principles and
+          constraints, and it pushes back when you violate them."
+        </aside>
+      </section>
+
+      <!-- Slide 5: What's Missing -->
+      <section>
+        <h2>What's Missing</h2>
+        <div style="font-size: 0.85em; text-align: left; max-width: 700px; margin: 0 auto;">
+          <div class="fragment fade-in-then-semi-out">
+            <p><span class="accent-bold">Structured feedback loops</span></p>
+            <p class="dim text-small" style="margin-left: 1.5em;">Memory exists, but it's topical and limited — it doesn't capture domain knowledge, team preferences, or established procedures.</p>
+          </div>
+          <div class="fragment fade-in-then-semi-out mt-1">
+            <p><span class="accent-bold">Critical analysis</span></p>
+            <p class="dim text-small" style="margin-left: 1.5em;">AI agrees with everything. Bad decisions go unchallenged.</p>
+          </div>
+          <div class="fragment fade-in-then-semi-out mt-1">
+            <p><span class="accent-bold">Project-level context</span></p>
+            <p class="dim text-small" style="margin-left: 1.5em;">No architectural awareness. No cross-module consistency.</p>
+          </div>
+          <div class="fragment fade-in mt-1">
+            <p><span class="accent-bold">Knowledge accumulation</span></p>
+            <p class="dim text-small" style="margin-left: 1.5em;">Decisions are forgotten. The same mistakes repeat across cycles.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          ~60 seconds. Build each point. "These aren't nice-to-haves. They're the difference
+          between AI that helps you code and AI that helps you ship."
+        </aside>
+      </section>
+
+      <!-- ============================================
+           ACT 2: THE VISION
+           ============================================ -->
+
+      <!-- Slide 6: Section Divider -->
+      <section data-background-gradient="linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%)" class="section-divider">
+        <h2 style="font-size: 1.8em;">Beyond <span class="accent">Single Tasks</span></h2>
+        <p class="dim" style="font-size: 0.7em;">Planning and executing at a larger scale</p>
+        <aside class="notes">
+          ~10 seconds. Transition. "So the question became: can AI plan and execute
+          at a scale beyond individual tasks? That's what I set out to build."
+        </aside>
+      </section>
+
+      <!-- Slide 7: Introducing ideate + SDLC Loop -->
+      <section>
+        <h2><span class="accent">ideate</span></h2>
+        <div class="highlight-box" style="max-width: 750px; margin: 0.5em auto;">
+          <p style="font-size: 0.85em;">
+            A Claude Code plugin that <strong>plans</strong>, <strong>executes</strong>,
+            <strong>reviews</strong>, and <strong>refines</strong> — trying to bring
+            engineering rigor to the full development lifecycle.
+          </p>
+        </div>
+        <div style="margin-top: 1em;">
+          <div class="flow-row">
+            <div class="flow-box active fragment" data-id="plan-box">Plan</div>
+            <div class="flow-arrow fragment">&#8594;</div>
+            <div class="flow-box fragment" data-id="exec-box">Execute</div>
+            <div class="flow-arrow fragment">&#8594;</div>
+            <div class="flow-box fragment" data-id="review-box">Review</div>
+            <div class="flow-arrow fragment">&#8594;</div>
+            <div class="flow-box fragment" data-id="refine-box">Refine</div>
+            <div class="flow-arrow fragment">&#8635;</div>
+          </div>
+        </div>
+        <div style="font-size: 0.7em; text-align: left; max-width: 650px; margin: 0.8em auto 0;">
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent">&#9656;</span> &nbsp;Interrogates requirements instead of accepting them
+          </p>
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent">&#9656;</span> &nbsp;Accumulates domain knowledge across cycles
+          </p>
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent">&#9656;</span> &nbsp;Reviews its own output from multiple perspectives
+          </p>
+          <p class="fragment fade-in">
+            <span class="accent">&#9656;</span> &nbsp;Converges on quality through structured feedback loops
+          </p>
+        </div>
+        <aside class="notes">
+          ~90 seconds. "ideate is a Claude Code plugin that manages the full development
+          lifecycle. Plan decomposes the idea into specs. Execute builds it with specialized
+          agents. Review evaluates from multiple perspectives. Refine addresses findings.
+          And then the loop repeats. It interrogates requirements, accumulates domain
+          knowledge, and converges on quality through structured feedback."
+        </aside>
+      </section>
+
+      <!-- ============================================
+           ACT 3: HOW IT WORKS
+           ============================================ -->
+
+      <!-- Slide 9: Section Divider -->
+      <section data-background-gradient="linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(34, 211, 238, 0.08) 100%)" class="section-divider">
+        <h2>How It Works</h2>
+        <p class="dim" style="font-size: 0.7em;">From rough idea to production-ready code</p>
+        <aside class="notes">~5 seconds. Transition slide.</aside>
+      </section>
+
+      <!-- Slide 10: Filling the Gaps -->
+      <section>
+        <h2>Filling the Gaps</h2>
+        <p class="dim text-small mb-1">Reducing hallucinations by eliminating ambiguity</p>
+        <div class="two-column">
+          <div>
+            <h3 style="font-size: 0.8em;" class="accent-warning">What You Haven't Specified</h3>
+            <div class="text-small" style="line-height: 1.8;">
+              <span class="fragment fade-in-then-semi-out"><code>"handle errors"</code> — which errors? how?</span><br>
+              <span class="fragment fade-in-then-semi-out"><code>"secure"</code> — against what threats?</span><br>
+              <span class="fragment fade-in-then-semi-out"><code>"scalable"</code> — to what load?</span><br>
+              <span class="fragment fade-in"><code>"best practices"</code> — whose? which ones?</span>
+            </div>
+            <p class="fragment dim text-xs mt-1">When the spec has gaps, the AI fills them by guessing.</p>
+          </div>
+          <div class="fragment">
+            <h3 style="font-size: 0.8em;" class="accent-success">ideate Makes You Explicit</h3>
+            <div class="highlight-box" style="font-size: 0.6em;">
+              <p><strong>You said:</strong> "handle errors appropriately"</p>
+              <p class="mt-1"><strong>ideate asks:</strong> What specific errors can occur?
+              For each: retry, log, alert, fail silently, or propagate?
+              What is the retry policy — how many attempts, with what backoff?
+              What constitutes permanent vs. transient failure?</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          ~75 seconds. "During planning, ideate identifies what you haven't specified and
+          asks you to be explicit. Every gap in a spec is a place where the AI has to guess —
+          and guessing is how you get confident, wrong code. 'Handle errors appropriately' —
+          appropriate for whom? Under what conditions? ideate forces you to close the gaps
+          so the executor doesn't have to invent answers."
+
+          BREADCRUMB 2: "This interview approach came from my first attempt at solving the
+          problem — I built a reverse-prompting tool that interviewed me in depth before
+          taking on work. That part worked really well. It was the downstream cost that broke."
+        </aside>
+      </section>
+
+      <!-- Slide 11: Guiding Principles -->
+      <section>
+        <h2>Guiding Principles</h2>
+        <p class="dim text-small">A decision framework — borrowed from practices that work</p>
+        <div class="two-column mt-1">
+          <div class="code-compact">
+            <pre><code data-trim data-line-numbers="1-2|3-7" class="language-yaml">
+id: GP-01
+name: Spec Sufficiency
+description: |
+  Plans are complete only when any
+  reasonable question can be answered
+  from specs alone. Two independent
+  LLMs given the same spec would
+  produce functionally equivalent
+  output.
+            </code></pre>
+          </div>
+          <div class="fragment" style="font-size: 0.75em;">
+            <p class="accent-bold mb-1">Borrowed From Practices That Work</p>
+            <p class="dim text-small"><strong>DDD bounded contexts</strong> — keep scope manageable so agents don't drown in irrelevant context.</p>
+            <p class="dim text-small mt-1"><strong>Agile acceptance criteria</strong> — make verification concrete and automatable.</p>
+            <p class="dim text-small mt-1"><strong>Continuous improvement</strong> — review cycles drive convergence.</p>
+            <p class="text-small mt-1">Principles resolve ambiguity during execution so the agent doesn't have to guess.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          ~75 seconds. "If this looks familiar, it should. Guiding principles are borrowed
+          from Domain-Driven Design and agile practices. Bounded contexts keep scope manageable.
+          Acceptance criteria make verification concrete. Continuous review cycles drive
+          improvement. What's different is applying these to AI agents, not human teams. The
+          principles resolve ambiguity during execution — when the spec doesn't answer a question,
+          the principles do, without stopping to ask the user."
+
+          BREADCRUMB 3: "The DDD connection was actually a turning point for me. I had a
+          reverse-prompting tool that worked but was insanely expensive — it had to evaluate
+          every prior decision for context. When I started thinking in terms of bounded contexts
+          and domain mapping, the cost problem started to crack."
+        </aside>
+      </section>
+
+      <!-- Slide: Spec Sufficiency -->
+      <section>
+        <h2>Spec Sufficiency</h2>
+        <p class="dim text-small">The quality bar — borrowed from XP's acceptance criteria</p>
+        <div class="highlight-box" style="max-width: 700px; margin: 0.8em auto;">
+          <p style="font-size: 0.85em; text-align: center; margin: 0;">
+            Two independent LLMs, same spec, <strong class="accent">equivalent output</strong>.
+          </p>
+        </div>
+        <div style="font-size: 0.75em; text-align: left; max-width: 650px; margin: 1em auto;">
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent">&#9656;</span> &nbsp;Every file path specified — no ambiguous locations
+          </p>
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent">&#9656;</span> &nbsp;Every function signature defined — no guessing at interfaces
+          </p>
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent">&#9656;</span> &nbsp;Every error case handled — no "handle appropriately"
+          </p>
+          <p class="fragment fade-in">
+            <span class="accent">&#9656;</span> &nbsp;Every criterion tagged <code>[machine]</code> or <code>[human]</code> — no ambiguous verification
+          </p>
+        </div>
+        <aside class="notes">
+          ~60 seconds. "This is the bar. If I hand the same spec to two different AI systems
+          and they produce fundamentally different code, the spec failed — not the AI. This idea
+          comes straight from acceptance criteria in XP and agile: define done before you start.
+          The difference is specificity. Every file path, every function signature, every error
+          case. And every acceptance criterion is tagged — can a machine verify this, or does
+          a human need to judge it?"
+        </aside>
+      </section>
+
+      <!-- Slide 12: Decomposition -->
+      <section>
+        <h2>Decomposition</h2>
+        <p class="dim text-small">Atomic work items with machine-verifiable acceptance criteria</p>
+        <div class="two-column mt-1">
+          <div class="code-compact">
+            <pre><code data-trim data-line-numbers="1-3|4-6|7-10|11-12" class="language-yaml">
+id: WI-004
+title: "PPR Deep Dive Slides"
+complexity: high
+scope:
+  - {path: "index.html", op: modify}
+depends: [003]
+criteria:
+  - "KaTeX-rendered PPR formula
+     [machine]"
+  - "Auto-animate graph walkthrough
+     [machine]"
+  - "Engineer unfamiliar with PPR
+     understands it [human]"
+module: null
+domain: presentation
+            </code></pre>
+          </div>
+          <div style="font-size: 0.75em;">
+            <p class="accent-bold mb-1">How It Works</p>
+            <p class="dim text-small">Each work item is an <strong>atomic unit</strong> with non-overlapping file scopes. Dependencies form a DAG.</p>
+            <p class="text-small mt-1">
+              <span class="accent">[machine]</span> — verifiable by code inspection or tests
+            </p>
+            <p class="text-small">
+              <span class="accent-secondary">[human]</span> — requires human judgment
+            </p>
+            <p class="dim text-small mt-1">This tagging determines how convergence is checked: automated criteria are verified programmatically, subjective ones are routed to review agents.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          ~60 seconds. "Every work item is an atomic unit. Non-overlapping file scopes — no two
+          concurrent items touch the same file. Dependencies form a DAG. Acceptance criteria are
+          explicitly tagged: can a machine verify this, or does it need human judgment? This is
+          how you get predictable execution at scale."
+        </aside>
+      </section>
+
+      <!-- Slide 13: 9 Specialized Agents -->
+      <section>
+        <h2>9 Specialized Agents</h2>
+        <div class="agent-grid">
+          <div class="agent-card fragment">
+            <div class="agent-name">architect</div>
+            <div class="agent-role">Analyzes codebases &amp; designs module boundaries</div>
+          </div>
+          <div class="agent-card fragment">
+            <div class="agent-name">researcher</div>
+            <div class="agent-role">Investigates technologies &amp; patterns</div>
+          </div>
+          <div class="agent-card fragment">
+            <div class="agent-name">decomposer</div>
+            <div class="agent-role">Breaks specs into atomic work items</div>
+          </div>
+          <div class="agent-card fragment">
+            <div class="agent-name">code-reviewer</div>
+            <div class="agent-role">Correctness, security, OWASP Top 10</div>
+          </div>
+          <div class="agent-card fragment">
+            <div class="agent-name">spec-reviewer</div>
+            <div class="agent-role">Architecture &amp; principle adherence</div>
+          </div>
+          <div class="agent-card fragment">
+            <div class="agent-name">gap-analyst</div>
+            <div class="agent-role">Missing requirements &amp; edge cases</div>
+          </div>
+          <div class="agent-card fragment">
+            <div class="agent-name">domain-curator</div>
+            <div class="agent-role">Distills policies from review cycles</div>
+          </div>
+          <div class="agent-card fragment">
+            <div class="agent-name">journal-keeper</div>
+            <div class="agent-role">Synthesizes decisions &amp; open questions</div>
+          </div>
+          <div class="agent-card fragment">
+            <div class="agent-name">proxy-human</div>
+            <div class="agent-role">Makes decisions during autonomous runs</div>
+          </div>
+        </div>
+        <aside class="notes">
+          ~60 seconds. "ideate doesn't use a single AI for everything. Nine specialized agents,
+          each with a focused role and specific tools. The architect designs, the decomposer
+          breaks it down, multiple reviewers evaluate from different angles, and the
+          domain-curator captures knowledge for future cycles."
+        </aside>
+      </section>
+
+      <!-- Slide 14: Critical Review -->
+      <section>
+        <h2>Critical Review</h2>
+        <p class="dim text-small">Each reviewer has a focused scope and specialized context</p>
+        <div class="three-column mt-1" style="font-size: 0.75em;">
+          <div class="highlight-box fragment">
+            <p class="accent-bold" style="font-size: 0.9em; margin-bottom: 0.5em;">code-reviewer</p>
+            <p class="text-small dim">Correctness<br>Security (OWASP)<br>Quality &amp; dead code<br>Test coverage</p>
+          </div>
+          <div class="highlight-box secondary fragment">
+            <p class="accent-bold" style="font-size: 0.9em; margin-bottom: 0.5em; color: var(--ideate-secondary);">spec-reviewer</p>
+            <p class="text-small dim">Architecture adherence<br>Principle compliance<br>Interface contracts<br>Naming consistency</p>
+          </div>
+          <div class="highlight-box success fragment">
+            <p class="accent-bold" style="font-size: 0.9em; margin-bottom: 0.5em; color: var(--ideate-success);">gap-analyst</p>
+            <p class="text-small dim">Missing requirements<br>Unhandled edge cases<br>Incomplete integrations<br>Implicit expectations</p>
+          </div>
+        </div>
+        <p class="fragment text-small mt-1 dim">
+          Scoped roles mean better context — each persona holds more relevant information because it isn't trying to evaluate everything at once.
+        </p>
+        <aside class="notes">
+          ~75 seconds. "Review isn't one agent trying to check everything. Each reviewer has a
+          focused scope — code quality, spec adherence, or gap analysis — which means each one
+          can hold more relevant context for its specific concern. A code-reviewer loaded with
+          OWASP policies and test patterns catches things a generalist misses. This connects
+          directly to the context problem: even reviewers benefit from focused context windows."
+        </aside>
+      </section>
+
+      <!-- Slide 15: Domain Knowledge Layer -->
+      <section>
+        <h2>Domain Knowledge</h2>
+        <p class="dim text-small">The system gets smarter with every cycle</p>
+        <div class="three-column mt-1" style="font-size: 0.75em;">
+          <div class="fragment">
+            <p class="accent-bold" style="font-size: 1.1em;">Policies</p>
+            <p class="dim text-small">Durable rules for<br>future workers</p>
+            <div class="highlight-box text-xs" style="text-align: left;">
+              <strong>P-07:</strong> All API endpoints must validate input at the boundary.
+              Derived from GP-01.
+            </div>
+          </div>
+          <div class="fragment">
+            <p class="accent-bold" style="font-size: 1.1em; color: var(--ideate-secondary);">Decisions</p>
+            <p class="dim text-small">Choices with rationale<br>and citations</p>
+            <div class="highlight-box secondary text-xs" style="text-align: left;">
+              <strong>D-15:</strong> Use SQLite over PostgreSQL. Rationale: zero-config, WAL mode supports concurrent reads.
+            </div>
+          </div>
+          <div class="fragment">
+            <p class="accent-bold" style="font-size: 1.1em; color: var(--ideate-success);">Questions</p>
+            <p class="dim text-small">Open issues with<br>impact assessment</p>
+            <div class="highlight-box success text-xs" style="text-align: left;">
+              <strong>Q-23:</strong> Should PPR weights be learned or hand-tuned? Impact: affects retrieval quality.
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          ~75 seconds. "This is what makes ideate fundamentally different from a coding assistant.
+          After every review cycle, the domain-curator distills important findings into policies,
+          decisions, and questions. Policies are rules that future agents must follow. Decisions
+          document why choices were made. Questions track what's still unresolved. This knowledge
+          persists and accumulates. Cycle 20 benefits from everything learned in cycles 1-19."
+        </aside>
+      </section>
+
+      <!-- Slide 16: The brrr Loop -->
+      <section>
+        <h2>The <code>brrr</code> Loop</h2>
+        <p class="dim text-small">Autonomous convergence — no human in the loop</p>
+        <div class="mt-1" style="max-width: 700px; margin: 0 auto;">
+          <div class="flow-row">
+            <div class="flow-box">Execute</div>
+            <div class="flow-arrow">&#8594;</div>
+            <div class="flow-box">Review</div>
+            <div class="flow-arrow">&#8594;</div>
+            <div class="flow-box">Converge?</div>
+            <div class="flow-arrow">&#8594;</div>
+            <div class="flow-box">Refine</div>
+            <div class="flow-arrow">&#8635;</div>
+          </div>
+        </div>
+        <div class="two-column fragment mt-1" style="align-items: center;">
+          <div class="highlight-box" style="margin: 0;">
+            <p class="text-small" style="margin: 0;"><strong>Convergence =</strong></p>
+            <ul class="text-small" style="margin: 0.3em 0 0 1em;">
+              <li>Zero critical findings</li>
+              <li>Zero significant findings</li>
+              <li>All guiding principles satisfied</li>
+            </ul>
+          </div>
+          <div class="stat-row" style="gap: 1.5rem;">
+            <div class="stat-item">
+              <div class="stat-number" style="font-size: 2.5em;">59</div>
+              <div class="stat-label">Cycles</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number secondary" style="font-size: 2.5em;">1,161</div>
+              <div class="stat-label">Artifacts</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number success" style="font-size: 2.5em;">0</div>
+              <div class="stat-label">Critical Findings</div>
+            </div>
+          </div>
+        </div>
+        <p class="fragment dim text-xs mt-1">ideate built itself using this loop.</p>
+        <aside class="notes">
+          ~90 seconds. "The brrr command is the ultimate expression of this system. Execute all
+          work items, review them, check for convergence, refine anything that doesn't pass, and
+          loop. It runs until zero critical findings, zero significant findings, and all guiding
+          principles are satisfied. Andon events — issues the system can't resolve — get routed
+          to a proxy-human agent that makes decisions based on the guiding principles. ideate
+          built itself through 59 of these cycles, producing 1,161 planning artifacts."
+        </aside>
+      </section>
+
+      <!-- ============================================
+           ACT 4: THE SCIENCE — PPR DEEP DIVE
+           ============================================ -->
+
+      <!-- Slide 17: Section Divider -->
+      <section data-background-gradient="linear-gradient(135deg, rgba(99, 102, 241, 0.18) 0%, rgba(34, 211, 238, 0.12) 100%)" class="section-divider">
+        <h2>The Science — PPR Deep Dive</h2>
+        <p class="dim" style="font-size: 0.7em;">How ideate retrieves the right context — every time</p>
+        <aside class="notes">~5 seconds. "Now let's go deep. This is the engineering that makes ideate work."</aside>
+      </section>
+
+      <!-- Slide 18: The Context Problem -->
+      <section>
+        <h2>The Context Problem</h2>
+        <p class="dim text-small">Context windows are finite. Projects aren't.</p>
+        <div class="two-column mt-1" style="font-size: 0.75em;">
+          <div class="fragment">
+            <p class="accent-danger" style="font-weight: 600;">Naive Approach</p>
+            <p class="dim text-small">Dump everything in context.<br>
+              Token waste. "Lost in the middle" effect.<br>
+              Performance degrades at 50K+ tokens.</p>
+          </div>
+          <div class="fragment">
+            <p class="accent-success" style="font-weight: 600;">Smart Approach</p>
+            <p class="dim text-small">Retrieve <em>exactly</em> what's relevant.<br>
+              Module spec, domain policies, dependencies.<br>
+              But how do you know what's relevant?</p>
+          </div>
+        </div>
+        <p class="fragment text-small dim mt-1" style="max-width: 700px; margin-left: auto; margin-right: auto;">
+          LLM output quality is bounded by context quality. Give an LLM the wrong context, and it produces confident, wrong code.
+        </p>
+        <aside class="notes">
+          ~60 seconds. "Here's the fundamental challenge: an agent needs to implement work item 42.
+          What context does it need? The module spec? Domain policies? Prior review findings?
+          Dependency interfaces? Context windows are finite, but projects keep growing. If you
+          dump everything in, you waste tokens and the LLM gets confused. But if you're too
+          selective, you miss critical information. You need a principled way to rank every
+          artifact by relevance."
+
+          BREADCRUMB 4: "This is exactly the problem that DDD bounded contexts solved
+          partially for me — they reduced the scope. But I still needed to rank WITHIN
+          the scope. Which policies matter most for this task? That's what drove me to PPR."
+        </aside>
+      </section>
+
+      <!-- Slide 19: ideate's Knowledge Graph -->
+      <section>
+        <h2>How ideate Organizes Knowledge</h2>
+        <p class="dim text-small">A structured graph of every artifact and its relationships</p>
+        <div class="two-column mt-1">
+          <div style="font-size: 0.65em;">
+            <p class="accent-bold mb-1">12 Node Types</p>
+            <div style="line-height: 1.7;">
+              <code>work_item</code> &middot; <code>module_spec</code><br>
+              <code>guiding_principle</code> &middot; <code>constraint</code><br>
+              <code>domain_policy</code> &middot; <code>decision</code><br>
+              <code>question</code> &middot; <code>research</code><br>
+              <code>finding</code> &middot; <code>journal_entry</code><br>
+              <code>interview</code> &middot; <code>document</code>
+            </div>
+          </div>
+          <div style="font-size: 0.65em;">
+            <p style="color: var(--ideate-secondary); font-weight: 700;" class="mb-1">10 Edge Types</p>
+            <div style="line-height: 1.7;">
+              <code>depends_on</code> &middot; <code>blocks</code><br>
+              <code>belongs_to_module</code><br>
+              <code>belongs_to_domain</code><br>
+              <code>derived_from</code><br>
+              <code>applies_to</code> &middot; <code>relates_to</code><br>
+              <code>addressed_by</code><br>
+              <code>amended_by</code> &middot; <code>supersedes</code>
+            </div>
+          </div>
+        </div>
+        <div class="fragment text-small mt-1" style="max-width: 700px; margin: 0 auto;">
+          <p>The graph lets you <strong>find relevant artifacts</strong> for a task, <strong>trace dependencies</strong> between work items, and <strong>discover which policies apply</strong> to a given module.</p>
+        </div>
+        <p class="fragment text-xs dim mt-1">SQLite backbone &middot; YAML source of truth &middot; Runtime index with chokidar watcher</p>
+        <aside class="notes">
+          ~60 seconds. "ideate organizes all project knowledge in a structured graph. Every
+          artifact — work items, policies, research, decisions — is a node. Relationships like
+          dependencies, module membership, and policy applicability are edges. This structure
+          lets you find the relevant artifacts for any task, trace how work items depend on each
+          other, and discover which policies apply to a given module. It's backed by SQLite
+          with a runtime index that rebuilds from YAML source files."
+        </aside>
+      </section>
+
+      <!-- Slide: First Attempt — BFS -->
+      <section>
+        <h2>First Attempt: Breadth-First Search</h2>
+        <p class="dim text-small">Start at the work item, walk N hops, collect everything</p>
+        <div class="two-column mt-1">
+          <div style="font-size: 0.75em;">
+            <p class="fragment fade-in-then-semi-out">
+              <span class="accent">&#9656;</span> &nbsp;<strong>Simple</strong> — walk 2-3 hops, include every node you reach
+            </p>
+            <p class="fragment fade-in-then-semi-out mt-1">
+              <span class="accent-danger">&#9656;</span> &nbsp;<strong>Hard cutoff</strong> — hop 3 is in, hop 4 is out. No ranking.
+            </p>
+            <p class="fragment fade-in-then-semi-out mt-1">
+              <span class="accent-danger">&#9656;</span> &nbsp;<strong>Hub explosion</strong> — popular policies drag in every work item that references them
+            </p>
+            <p class="fragment fade-in mt-1">
+              <span class="accent-danger">&#9656;</span> &nbsp;<strong>No weighting</strong> — a critical dependency and a loose reference get equal treatment
+            </p>
+          </div>
+          <div class="fragment" style="font-size: 0.75em;">
+            <div class="highlight-box warning">
+              <p class="text-small" style="margin: 0;">
+                <strong>On ideate's graph:</strong><br>
+                BFS depth 2 → ~40-60 nodes<br>
+                BFS depth 3 → 100+ nodes<br>
+                Most are irrelevant. No way to rank them.
+              </p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          ~60 seconds. "BFS was the obvious first approach. Walk N hops from the work item
+          and collect everything. Simple, and it works for small projects. But on ideate's own
+          graph, depth 2 returns 40-60 nodes and depth 3 returns over a hundred. Most are
+          irrelevant, and you have no way to rank them. You end up stuffing everything into
+          context — exactly the problem we were trying to solve."
+        </aside>
+      </section>
+
+      <!-- Slide: Random Walks — The Key Insight -->
+      <section>
+        <h2>Random Walks</h2>
+        <p class="dim text-small">What if the graph could rank the nodes for us?</p>
+        <div style="max-width: 750px; margin: 0.8em auto; text-align: left; font-size: 0.8em;">
+          <p class="fragment fade-in-then-semi-out">
+            Instead of collecting everything within N hops, <strong>follow links at random</strong> from your starting node — thousands of times.
+          </p>
+          <p class="fragment fade-in-then-semi-out mt-1">
+            Nodes you visit <strong>more often</strong> are more relevant. Nodes reachable by <strong>many short paths</strong> score higher than nodes reachable by one long path.
+          </p>
+          <p class="fragment fade-in mt-1">
+            This is <strong>PageRank</strong> (Brin &amp; Page, 1998) — the algorithm that ranked the web. The same math works on any graph, including a graph of SDLC artifacts.
+          </p>
+        </div>
+        <div class="fragment highlight-box secondary mt-1" style="max-width: 650px; margin-left: auto; margin-right: auto;">
+          <p class="text-small" style="margin: 0;">
+            <strong>vs. BFS:</strong> no hard cutoff. Relevance decays smoothly with distance.
+            A distant node reachable by many paths scores higher than a nearby node with one weak connection.
+          </p>
+        </div>
+        <aside class="notes">
+          ~60 seconds. "Here's the insight. Instead of grabbing everything within N hops,
+          imagine following links at random from your starting node — thousands of times.
+          Count how often you visit each node. That visit frequency IS the relevance score.
+          This is PageRank — the same algorithm that ranked the web. And the critical difference
+          from BFS: no hard cutoff. Relevance decays smoothly. A distant node that's reachable
+          by many paths can outrank a nearby node with one weak connection."
+        </aside>
+      </section>
+
+      <!-- Slide: Personalized PageRank -->
+      <section>
+        <h2><span class="accent">Personalized</span> PageRank</h2>
+        <p class="dim text-small">From global importance to local relevance</p>
+        <div style="max-width: 750px; margin: 0.5em auto; text-align: left; font-size: 0.8em;">
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent-bold">Standard PageRank:</span>
+            random walk jumps back to <em>any</em> node &#8594; global ranking
+          </p>
+          <p class="fragment fade-in-then-semi-out mt-1">
+            <span class="accent-bold">Personalized PageRank:</span>
+            random walk jumps back to a <em>seed node</em> with probability $\alpha$ &#8594; ranking relative to seed
+          </p>
+          <p class="fragment fade-in mt-1">
+            <span class="accent-bold">For ideate:</span>
+            seed = the work item being executed &#8594; ranks every artifact by relevance to <em>this task</em>
+          </p>
+        </div>
+        <div class="fragment highlight-box secondary mt-1" style="max-width: 650px; margin-left: auto; margin-right: auto;">
+          <p class="text-small" style="margin: 0;">
+            The walk always returns to the starting point. Nearby nodes score higher.<br>
+            But structurally important distant nodes still surface.
+          </p>
+        </div>
+        <aside class="notes">
+          ~75 seconds. "Here's the key modification. In standard PageRank, the random walk
+          can jump back to any node in the graph — giving you global importance. In Personalized
+          PageRank, it always jumps back to a specific seed node — in our case, the work item
+          we're building. This biases the entire ranking toward the seed's neighborhood. Nodes
+          close to the work item score higher. But structurally important nodes that are farther
+          away — like a frequently-referenced domain policy — still surface. PPR finds relevance,
+          not just proximity."
+        </aside>
+      </section>
+
+      <!-- Slide 22: The Math -->
+      <section>
+        <h2>The Math</h2>
+        <div style="margin-top: 0.5em;">
+          <p class="fragment text-small dim">$\vec{\pi}$ gives us the relevance score for every node in the graph:</p>
+          <div class="fragment" style="font-size: 1.2em; margin: 0.8em 0;">
+            $$\vec{\pi} = \alpha \vec{s} + (1 - \alpha) M \vec{\pi}$$
+          </div>
+          <div style="max-width: 700px; margin: 0 auto; text-align: left; font-size: 0.7em;">
+            <p class="fragment fade-in-then-semi-out">
+              $\vec{\pi}$ — relevance scores over all nodes <span class="dim">(what we want)</span>
+            </p>
+            <p class="fragment fade-in-then-semi-out">
+              $\vec{s}$ — seed vector <span class="dim">(1.0 on the work item, 0 elsewhere)</span>
+            </p>
+            <p class="fragment fade-in-then-semi-out">
+              $M$ — transition matrix <span class="dim">(edge weights, column-normalized)</span>
+            </p>
+            <p class="fragment fade-in">
+              $\alpha$ — jump-back probability <span class="dim">(typically 0.15 — controls exploration depth)</span>
+            </p>
+          </div>
+        </div>
+        <p class="fragment text-small dim mt-1">
+          Iterate until convergence. ~20 iterations. One computation pass. No LLM calls for retrieval.
+        </p>
+        <aside class="notes">
+          ~90 seconds. Build the formula term by term. "This is the core equation. Pi is the
+          vector of relevance scores — it tells us how relevant each artifact is to the task
+          at hand. s is the seed vector — all the starting weight is on our work item. M is
+          the transition matrix — it encodes the graph structure with edge weights. And alpha
+          controls how often the walk jumps back to the seed instead of following an edge.
+          Iterate this equation about 20 times and it converges to stable scores. Every node
+          now has a relevance score. No LLM calls needed. Pure math."
+        </aside>
+      </section>
+
+      <!-- Walking the Graph (4-step vertical stack with auto-animate + SVG edges) -->
+      <section>
+        <!-- Step 1: All probability on seed -->
+        <section data-auto-animate>
+          <h3 data-id="walk-title">Walking the Graph</h3>
+          <p class="dim text-xs" data-id="walk-sub">Step 1: All probability mass on the seed node — $\pi(\text{WI-042}) = 1.0$</p>
+          <div class="graph-container" data-id="graph">
+            <svg viewBox="0 0 800 450" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;">
+              <line x1="400" y1="65" x2="190" y2="200" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <line x1="400" y1="65" x2="585" y2="195" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="85" y2="345" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="285" y2="345" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <line x1="85" y1="345" x2="130" y2="430" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="533" y2="353" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <text x="280" y="125" fill="rgba(148,163,184,0.3)" font-size="10" font-family="Inter">belongs_to</text>
+              <text x="495" y="120" fill="rgba(148,163,184,0.3)" font-size="10" font-family="Inter">depends_on</text>
+              <text x="100" y="275" fill="rgba(148,163,184,0.3)" font-size="10" font-family="Inter">applies_to</text>
+            </svg>
+            <div class="graph-node seed" data-id="n-wi042" style="width: 90px; height: 90px; left: 355px; top: 20px;"><span style="font-size:1.1em">WI-042</span><br><span style="font-size:0.7em;opacity:0.7">1.00</span></div>
+            <div class="graph-node cold" data-id="n-auth" style="width: 80px; height: 80px; left: 150px; top: 160px;">auth</div>
+            <div class="graph-node cold" data-id="n-wi041" style="width: 70px; height: 70px; left: 550px; top: 160px;">WI-041</div>
+            <div class="graph-node cold" data-id="n-p07" style="width: 70px; height: 70px; left: 50px; top: 310px;">P-07</div>
+            <div class="graph-node cold" data-id="n-p01" style="width: 70px; height: 70px; left: 250px; top: 310px;">P-01</div>
+            <div class="graph-node cold" data-id="n-gp01" style="width: 60px; height: 60px; left: 100px; top: 400px; font-size: 0.4em;">GP-01</div>
+            <div class="graph-node cold" data-id="n-rf" style="width: 65px; height: 65px; left: 500px; top: 320px; font-size: 0.4em;">RF-auth</div>
+            <div class="graph-node cold" data-id="n-wi099" style="width: 55px; height: 55px; left: 680px; top: 370px; font-size: 0.35em;">WI-099</div>
+          </div>
+          <aside class="notes">
+            ~30 seconds. "Let's walk through a concrete example. We need context for WI-042 —
+            implement auth middleware. All probability mass starts on this seed node. The graph
+            shows the relationships: WI-042 belongs to the auth module, depends on WI-041,
+            and the auth module is governed by security policies P-07 and P-01."
+          </aside>
+        </section>
+
+        <!-- Step 2: First iteration — probability spreads -->
+        <section data-auto-animate>
+          <h3 data-id="walk-title">Walking the Graph</h3>
+          <p class="dim text-xs" data-id="walk-sub">Step 2: Probability flows along edges to neighbors</p>
+          <div class="graph-container" data-id="graph">
+            <svg viewBox="0 0 800 450" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;">
+              <line x1="400" y1="65" x2="190" y2="200" stroke="rgba(99,102,241,0.5)" stroke-width="2"/>
+              <line x1="400" y1="65" x2="585" y2="195" stroke="rgba(99,102,241,0.4)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="85" y2="345" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="285" y2="345" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <line x1="85" y1="345" x2="130" y2="430" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="533" y2="353" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <text x="280" y="125" fill="rgba(99,102,241,0.5)" font-size="10" font-family="Inter">belongs_to</text>
+              <text x="495" y="120" fill="rgba(99,102,241,0.4)" font-size="10" font-family="Inter">depends_on</text>
+            </svg>
+            <div class="graph-node seed" data-id="n-wi042" style="width: 82px; height: 82px; left: 359px; top: 24px;"><span style="font-size:1.1em">WI-042</span><br><span style="font-size:0.7em;opacity:0.7">.42</span></div>
+            <div class="graph-node hot" data-id="n-auth" style="width: 85px; height: 85px; left: 148px; top: 158px;"><span style="font-size:1.1em">auth</span><br><span style="font-size:0.7em;opacity:0.7">.31</span></div>
+            <div class="graph-node warm" data-id="n-wi041" style="width: 72px; height: 72px; left: 549px; top: 159px;"><span style="font-size:1em">WI-041</span><br><span style="font-size:0.7em;opacity:0.7">.14</span></div>
+            <div class="graph-node cold" data-id="n-p07" style="width: 70px; height: 70px; left: 50px; top: 310px;">P-07</div>
+            <div class="graph-node cold" data-id="n-p01" style="width: 70px; height: 70px; left: 250px; top: 310px;">P-01</div>
+            <div class="graph-node cold" data-id="n-gp01" style="width: 60px; height: 60px; left: 100px; top: 400px; font-size: 0.4em;">GP-01</div>
+            <div class="graph-node cold" data-id="n-rf" style="width: 65px; height: 65px; left: 500px; top: 320px; font-size: 0.4em;">RF-auth</div>
+            <div class="graph-node cold" data-id="n-wi099" style="width: 55px; height: 55px; left: 680px; top: 370px; font-size: 0.35em;">WI-099</div>
+          </div>
+          <aside class="notes">
+            ~30 seconds. "After the first iteration, probability flows along edges. The auth
+            module gets a large share — it's directly connected via belongs_to with weight 0.8.
+            WI-041 gets a smaller share via depends_on. Notice the probability numbers changing
+            on each node. The walk is traversing the graph."
+          </aside>
+        </section>
+
+        <!-- Step 3: Several iterations — heat map emerges -->
+        <section data-auto-animate>
+          <h3 data-id="walk-title">Walking the Graph</h3>
+          <p class="dim text-xs" data-id="walk-sub">Step 3: After several iterations — scores propagate deeper</p>
+          <div class="graph-container" data-id="graph">
+            <svg viewBox="0 0 800 450" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;">
+              <line x1="400" y1="65" x2="190" y2="200" stroke="rgba(99,102,241,0.5)" stroke-width="2"/>
+              <line x1="400" y1="65" x2="585" y2="195" stroke="rgba(99,102,241,0.35)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="85" y2="345" stroke="rgba(99,102,241,0.3)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="285" y2="345" stroke="rgba(99,102,241,0.25)" stroke-width="1.5"/>
+              <line x1="85" y1="345" x2="130" y2="430" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="533" y2="353" stroke="rgba(148,163,184,0.15)" stroke-width="1.5"/>
+            </svg>
+            <div class="graph-node seed" data-id="n-wi042" style="width: 88px; height: 88px; left: 356px; top: 18px;"><span style="font-size:1.1em">WI-042</span><br><span style="font-size:0.7em;opacity:0.7">.38</span></div>
+            <div class="graph-node hot" data-id="n-auth" style="width: 82px; height: 82px; left: 149px; top: 159px;"><span style="font-size:1.1em">auth</span><br><span style="font-size:0.7em;opacity:0.7">.25</span></div>
+            <div class="graph-node warm" data-id="n-wi041" style="width: 68px; height: 68px; left: 551px; top: 161px;"><span style="font-size:1em">WI-041</span><br><span style="font-size:0.7em;opacity:0.7">.11</span></div>
+            <div class="graph-node warm" data-id="n-p07" style="width: 74px; height: 74px; left: 48px; top: 308px;"><span style="font-size:1em">P-07</span><br><span style="font-size:0.7em;opacity:0.7">.09</span></div>
+            <div class="graph-node warm" data-id="n-p01" style="width: 67px; height: 67px; left: 252px; top: 312px;"><span style="font-size:1em">P-01</span><br><span style="font-size:0.7em;opacity:0.7">.06</span></div>
+            <div class="graph-node cold" data-id="n-gp01" style="width: 58px; height: 58px; left: 101px; top: 401px; font-size: 0.4em;"><span>GP-01</span><br><span style="font-size:0.8em;opacity:0.7">.03</span></div>
+            <div class="graph-node cold" data-id="n-rf" style="width: 60px; height: 60px; left: 503px; top: 323px; font-size: 0.4em;"><span>RF-auth</span><br><span style="font-size:0.8em;opacity:0.7">.02</span></div>
+            <div class="graph-node cold" data-id="n-wi099" style="width: 48px; height: 48px; left: 683px; top: 373px; font-size: 0.35em; opacity: 0.5;"><span>WI-099</span><br><span style="font-size:0.8em">.001</span></div>
+          </div>
+          <aside class="notes">
+            ~30 seconds. "After several iterations, scores have propagated deeper. Security
+            policy P-07 now scores .09 — two hops away but structurally important because
+            it governs the auth module. P-01 picks up .06. The unrelated WI-099 is effectively
+            zero — it has no path to the seed. Notice how the graph structure naturally
+            surfaces the right context."
+          </aside>
+        </section>
+
+        <!-- Step 4: Converged — top nodes selected -->
+        <section data-auto-animate>
+          <h3 data-id="walk-title">Walking the Graph</h3>
+          <p class="dim text-xs" data-id="walk-sub">Step 4: Converged — top 5 nodes selected for context</p>
+          <div class="graph-container" data-id="graph">
+            <svg viewBox="0 0 800 450" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;">
+              <line x1="400" y1="65" x2="190" y2="200" stroke="rgba(99,102,241,0.5)" stroke-width="2"/>
+              <line x1="400" y1="65" x2="585" y2="195" stroke="rgba(99,102,241,0.35)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="85" y2="345" stroke="rgba(99,102,241,0.3)" stroke-width="1.5"/>
+              <line x1="190" y1="200" x2="285" y2="345" stroke="rgba(99,102,241,0.25)" stroke-width="1.5"/>
+              <line x1="85" y1="345" x2="130" y2="430" stroke="rgba(148,163,184,0.1)" stroke-width="1"/>
+              <line x1="190" y1="200" x2="533" y2="353" stroke="rgba(148,163,184,0.1)" stroke-width="1"/>
+            </svg>
+            <!-- Selected nodes get a bright ring -->
+            <div class="graph-node seed" data-id="n-wi042" style="width: 90px; height: 90px; left: 355px; top: 17px; box-shadow: 0 0 20px rgba(34,211,238,0.4), 0 0 40px rgba(34,211,238,0.15);"><span style="font-size:1.1em">WI-042</span><br><span style="font-size:0.7em;opacity:0.7">.38</span></div>
+            <div class="graph-node hot" data-id="n-auth" style="width: 84px; height: 84px; left: 148px; top: 158px; box-shadow: 0 0 15px rgba(99,102,241,0.4);"><span style="font-size:1.1em">auth</span><br><span style="font-size:0.7em;opacity:0.7">.25</span></div>
+            <div class="graph-node warm" data-id="n-wi041" style="width: 70px; height: 70px; left: 550px; top: 160px; box-shadow: 0 0 12px rgba(99,102,241,0.3);"><span style="font-size:1em">WI-041</span><br><span style="font-size:0.7em;opacity:0.7">.11</span></div>
+            <div class="graph-node warm" data-id="n-p07" style="width: 76px; height: 76px; left: 47px; top: 307px; box-shadow: 0 0 12px rgba(99,102,241,0.3);"><span style="font-size:1em">P-07</span><br><span style="font-size:0.7em;opacity:0.7">.09</span></div>
+            <div class="graph-node warm" data-id="n-p01" style="width: 69px; height: 69px; left: 251px; top: 311px; box-shadow: 0 0 10px rgba(99,102,241,0.25);"><span style="font-size:1em">P-01</span><br><span style="font-size:0.7em;opacity:0.7">.06</span></div>
+            <!-- Pruned nodes -->
+            <div class="graph-node cold" data-id="n-gp01" style="width: 50px; height: 50px; left: 105px; top: 405px; font-size: 0.35em; opacity: 0.25;">GP-01</div>
+            <div class="graph-node cold" data-id="n-rf" style="width: 50px; height: 50px; left: 508px; top: 328px; font-size: 0.35em; opacity: 0.25;">RF-auth</div>
+            <div class="graph-node cold" data-id="n-wi099" style="width: 40px; height: 40px; left: 688px; top: 378px; font-size: 0.3em; opacity: 0.15;">WI-099</div>
+          </div>
+          <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 0.5em; color: var(--ideate-text-dim);">
+            <span class="accent">5 nodes selected</span> — work item, module, dependency, two policies. One pass. No LLM calls.
+          </div>
+          <aside class="notes">
+            ~45 seconds. "Converged. The top 5 nodes are selected for context — you can see
+            them glowing. WI-042 itself (.38), the auth module (.25), the dependency WI-041 (.11),
+            and the two security policies P-07 and P-01 (.09 and .06). The unrelated nodes
+            — GP-01, RF-auth, WI-099 — are pruned. This is one computation pass, no LLM calls
+            for retrieval, and the context is mathematically ranked by relevance to the task."
+          </aside>
+        </section>
+      </section>
+
+      <!-- Slide 26: Edge-Type Weighting -->
+      <section>
+        <h2>Edge-Type Weighting</h2>
+        <p class="dim text-small">Not all edges are equal — and this is what BFS can't do</p>
+        <div class="two-column mt-1">
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Edge Type</th>
+                  <th>Execute</th>
+                  <th>Review</th>
+                  <th>Plan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="fragment">
+                  <td><code>depends_on</code></td>
+                  <td><strong class="accent">1.0</strong></td>
+                  <td>0.4</td>
+                  <td>0.6</td>
+                </tr>
+                <tr class="fragment">
+                  <td><code>applies_to</code></td>
+                  <td>0.9</td>
+                  <td><strong class="accent-secondary">1.0</strong></td>
+                  <td>0.8</td>
+                </tr>
+                <tr class="fragment">
+                  <td><code>belongs_to</code></td>
+                  <td>0.8</td>
+                  <td>0.7</td>
+                  <td>0.5</td>
+                </tr>
+                <tr class="fragment">
+                  <td><code>informed_by</code></td>
+                  <td>0.3</td>
+                  <td>0.3</td>
+                  <td><strong class="accent-success">0.9</strong></td>
+                </tr>
+                <tr class="fragment">
+                  <td><code>has_findings</code></td>
+                  <td>0.2</td>
+                  <td><strong class="accent-secondary">1.0</strong></td>
+                  <td>0.5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="fragment" style="font-size: 0.7em;">
+            <p class="accent-bold mb-1">Why Not BFS?</p>
+            <p class="dim text-small">A breadth-first search walks N hops and treats every edge equally. It can't distinguish a critical dependency from a loose reference.</p>
+            <p class="text-small mt-1">With weighted edges, PPR naturally emphasizes <strong>dependencies during execution</strong>, <strong>policies during review</strong>, and <strong>research during planning</strong> — same graph, different context for each phase.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          ~75 seconds. "The transition matrix isn't uniform. Different edge types carry different
+          weights depending on what you're doing. BFS treats every edge the same and gives you a
+          hard cutoff at N hops — everything inside is in, everything outside is out. PPR with
+          weighted edges naturally emphasizes what matters for each phase. When executing,
+          dependencies get full weight. When reviewing, findings and policies dominate. Same
+          graph, different walks, different context."
+        </aside>
+      </section>
+
+      <!-- Slide: What This Costs -->
+      <section>
+        <h2>What This Costs</h2>
+        <p class="dim text-small">PPR is cheap. The alternative isn't.</p>
+        <div class="two-column mt-1">
+          <div style="font-size: 0.75em;">
+            <p class="accent-bold mb-1">Iterative Retrieval</p>
+            <p class="text-small">Ask an LLM to retrieve context, read it, decide if it needs more, retrieve again, repeat.</p>
+            <p class="text-small dim mt-1">Each iteration costs tokens. Multi-hop questions require 3-5 iterations. At scale, this dominates your API bill.</p>
+          </div>
+          <div style="font-size: 0.75em;">
+            <p style="color: var(--ideate-secondary); font-weight: 700;" class="mb-1">PPR</p>
+            <p class="text-small">One matrix computation. ~20 iterations of math, not LLM calls. Runs in milliseconds on SQLite.</p>
+            <div class="highlight-box success text-xs mt-1">
+              <p style="margin: 0;">
+                <strong>HippoRAG</strong> (NeurIPS 2024) compared these approaches:<br>
+                <strong class="accent-secondary">10-20x cheaper</strong> — one math pass vs. multiple LLM calls<br>
+                <strong class="accent-secondary">6-13x faster</strong> — milliseconds vs. seconds per retrieval<br>
+                <strong>Same quality</strong> on multi-hop retrieval benchmarks
+              </p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          ~60 seconds. "Here's why PPR matters practically, not just theoretically. The
+          alternative to PPR is iterative retrieval — you ask an LLM to find relevant context,
+          it reads it, decides it needs more, retrieves again. Each iteration costs tokens.
+          For multi-hop questions — where the answer requires connecting artifacts 2-3 hops apart
+          — you need 3-5 iterations. That dominates your API bill. PPR replaces all of that with
+          one matrix computation. About 20 iterations of math, not LLM calls. It runs in
+          milliseconds on SQLite. HippoRAG at NeurIPS 2024 measured this directly: PPR-based
+          retrieval is 10-20x cheaper and 6-13x faster, with comparable quality on multi-hop benchmarks."
+
+          BREADCRUMB 5: "This is where the cost problem forced me to go. When your API bill
+          makes you rethink everything, you either quit or you do the math."
+        </aside>
+      </section>
+
+      <!-- Slide 29: Built on Foundations That Scale -->
+      <section data-background-gradient="radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.12) 0%, rgba(10, 10, 15, 1) 70%)">
+        <h2>Principled Retrieval</h2>
+        <div style="max-width: 750px; margin: 1em auto; text-align: left; font-size: 0.8em;">
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent-bold">Grounded in graph theory</span> — Markov chains, stationary distributions, and spectral methods are well-established mathematics
+          </p>
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent-bold">Validated by published research</span> — HippoRAG (NeurIPS 2024) showed PPR-based retrieval matches iterative methods at 10-20x lower cost
+          </p>
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent-bold">Empirically calibrated</span> — edge weights tunable from actual usage data, not intuition
+          </p>
+          <p class="fragment fade-in">
+            <span class="accent-bold">Context quality doesn't degrade as the project grows</span> — <span class="dim">principled retrieval scales where heuristics break down</span>
+          </p>
+        </div>
+        <aside class="notes">
+          ~45 seconds. "The math here isn't new — Markov chains and stationary distributions are
+          well-established graph theory. The HippoRAG team at NeurIPS 2024 showed that PPR-based
+          retrieval matches iterative methods at a fraction of the cost. What I've done is apply
+          this specifically to SDLC artifact graphs with task-specific edge weighting. The key
+          property is that context quality doesn't degrade as the project grows — principled
+          retrieval scales where heuristic approaches break down."
+
+          BREADCRUMB 5: "This is where the cost problem from earlier forced me to go. When your
+          API bill makes you rethink everything, you either quit or you do the math. I did the math."
+        </aside>
+      </section>
+
+      <!-- ============================================
+           ACT 5: INTEGRATION & TEAMS
+           ============================================ -->
+
+      <!-- Slide: The Hook System -->
+      <section>
+        <h2>The Hook System</h2>
+        <p class="dim text-small">Event-driven integration with any external tool</p>
+        <div class="two-column mt-1">
+          <div>
+            <pre><code data-trim data-line-numbers="1-3|4-9|10-15" class="language-json" style="font-size: 0.55em;">
+// .ideate/hooks.json
+{
+  "hooks": [
+    {
+      "event": "work_item.completed",
+      "type": "command",
+      "value": "curl -X POST $JIRA_URL",
+      "enabled": true
+    },
+    {
+      "event": "review.complete",
+      "type": "command",
+      "value": "curl -X POST $SLACK_URL",
+      "enabled": true
+    }
+  ]
+}
+            </code></pre>
+          </div>
+          <div style="font-size: 0.75em;">
+            <p class="accent-bold mb-1">7 Event Types</p>
+            <ul style="line-height: 1.9;">
+              <li class="fragment fade-in-then-semi-out"><code>plan.complete</code></li>
+              <li class="fragment fade-in-then-semi-out"><code>work_item.started</code></li>
+              <li class="fragment fade-in-then-semi-out"><code>work_item.completed</code></li>
+              <li class="fragment fade-in-then-semi-out"><code>review.finding</code></li>
+              <li class="fragment fade-in-then-semi-out"><code>review.complete</code></li>
+              <li class="fragment fade-in-then-semi-out"><code>cycle.converged</code></li>
+              <li class="fragment fade-in"><code>andon.triggered</code></li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          ~75 seconds. "Hooks are how ideate connects to your existing tooling. Seven event
+          types fire at phase boundaries. Each hook is a shell command with variable substitution.
+          When a work item completes, update your Jira ticket. When a review finds something,
+          post to Slack. When convergence is reached, notify the team. Any tool with an API
+          becomes part of the workflow."
+        </aside>
+      </section>
+
+      <!-- Slide: Metrics & Observability -->
+      <section>
+        <h2>Metrics &amp; Observability</h2>
+        <p class="dim text-small">Know exactly what your AI spend buys you</p>
+        <div class="agent-grid mt-1" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="highlight-box fragment" style="text-align: center;">
+            <p class="accent-bold text-small">Token Efficiency</p>
+            <p class="dim text-xs mt-1">criteria_passed / input_tokens</p>
+            <p class="text-xs">Quality per token — the primary<br>signal for PPR optimization</p>
+          </div>
+          <div class="highlight-box secondary fragment" style="text-align: center;">
+            <p style="color: var(--ideate-secondary); font-weight: 700; font-size: 0.7em;">Cost-Quality Curve</p>
+            <p class="dim text-xs mt-1">Optimal context budget</p>
+            <p class="text-xs">U-shaped: too little &#8594; rework<br>too much &#8594; waste</p>
+          </div>
+          <div class="highlight-box success fragment" style="text-align: center;">
+            <p style="color: var(--ideate-success); font-weight: 700; font-size: 0.7em;">Finding Survival Rate</p>
+            <p class="dim text-xs mt-1">Findings from cycle N in cycle N+1</p>
+            <p class="text-xs">Measures whether issues actually<br>get fixed — not just found</p>
+          </div>
+          <div class="highlight-box warning fragment" style="text-align: center;">
+            <p style="color: var(--ideate-warning); font-weight: 700; font-size: 0.7em;">Context Utilization</p>
+            <p class="dim text-xs mt-1">cited_artifacts / retrieved_artifacts</p>
+            <p class="text-xs">How much of what we retrieve<br>actually gets used</p>
+          </div>
+        </div>
+        <aside class="notes">
+          ~60 seconds. "ideate tracks everything. Token efficiency tells you how much quality
+          you get per token spent. The cost-quality curve finds the optimal context budget.
+          Finding survival rate measures whether issues actually get fixed across cycles. And
+          context utilization — what fraction of retrieved artifacts actually get cited in the
+          output — is the signal that calibrates PPR weights over time."
+        </aside>
+      </section>
+
+      <!-- ============================================
+           ACT 6: PROOF
+           ============================================ -->
+
+      <!-- Slide 33: Eating Our Own Dog Food -->
+      <section>
+        <h2>Eating Our Own Dog Food</h2>
+        <p class="dim text-small">ideate built itself using its own methodology</p>
+        <div class="stat-row mt-2">
+          <div class="stat-item fragment">
+            <div class="stat-number">59</div>
+            <div class="stat-label">Evaluation Cycles</div>
+          </div>
+          <div class="stat-item fragment">
+            <div class="stat-number secondary">192</div>
+            <div class="stat-label">Work Items</div>
+          </div>
+          <div class="stat-item fragment">
+            <div class="stat-number success">1,161</div>
+            <div class="stat-label">YAML Artifacts</div>
+          </div>
+        </div>
+        <aside class="notes">
+          ~45 seconds. "The most thorough test of any tool is using it to build itself.
+          ideate has been through 59 evaluation cycles. 192 work items decomposed, executed,
+          reviewed, and refined. 1,161 planning artifacts documenting every decision, every
+          policy, every question. This isn't a prototype — it's a system that has converged
+          on its own quality criteria dozens of times."
+        </aside>
+      </section>
+
+      <!-- Slide 34: By the Numbers -->
+      <section>
+        <h2>By the Numbers</h2>
+        <div class="two-column mt-1" style="font-size: 0.75em;">
+          <div>
+            <div style="margin-bottom: 0.8em;" class="fragment">
+              <span class="stat-number" style="font-size: 1.8em;">13</span>
+              <span class="dim"> guiding principles</span>
+            </div>
+            <div style="margin-bottom: 0.8em;" class="fragment">
+              <span class="stat-number" style="font-size: 1.8em;">16</span>
+              <span class="dim"> constraints</span>
+            </div>
+            <div class="fragment">
+              <span class="stat-number" style="font-size: 1.8em;">18</span>
+              <span class="dim"> research findings</span>
+            </div>
+          </div>
+          <div>
+            <div style="margin-bottom: 0.8em;" class="fragment">
+              <span class="stat-number secondary" style="font-size: 1.8em;">105</span>
+              <span class="dim"> settled decisions</span>
+            </div>
+            <div style="margin-bottom: 0.8em;" class="fragment">
+              <span class="stat-number secondary" style="font-size: 1.8em;">32</span>
+              <span class="dim"> domain policies</span>
+            </div>
+            <div class="fragment">
+              <span class="stat-number secondary" style="font-size: 1.8em;">80</span>
+              <span class="dim"> tracked questions</span>
+            </div>
+          </div>
+        </div>
+        <p class="fragment text-small dim mt-2">
+          Every decision documented. Every question tracked. Nothing lost.
+        </p>
+        <aside class="notes">
+          ~45 seconds. "These numbers come from ideate's own .ideate/ directory. 105 design
+          decisions, each with rationale and citations. 32 domain policies distilled from
+          review findings. 80 questions tracked from open to resolved. This is what knowledge
+          accumulation looks like in practice."
+        </aside>
+      </section>
+
+      <!-- Slide 35: This Deck -->
+      <section>
+        <h2>This Deck</h2>
+        <div class="highlight-box" style="max-width: 700px; margin: 0.8em auto;">
+          <p style="font-size: 0.85em; margin: 0; text-align: center;">
+            This presentation was <strong class="accent">planned and built using ideate</strong>.
+          </p>
+        </div>
+        <div class="code-compact fragment mt-1">
+          <pre><code data-trim class="language-yaml">
+# From this deck's .ideate/ directory
+id: interview-plan-001
+entries:
+  - question: "What do you want to build?"
+    answer: "A reveal.js pitch deck for ideate..."
+  - question: "Who is the audience?"
+    answer: "Engineering leaders and thought leaders..."
+  - question: "How should PPR be framed?"
+    answer: "Not incremental — hard academic science..."
+          </code></pre>
+        </div>
+        <p class="fragment text-small dim mt-1">
+          7 guiding principles &middot; 6 constraints &middot; 6 work items &middot; 5 domain policies
+        </p>
+        <aside class="notes">
+          ~60 seconds. "And here's the meta-narrative. This presentation — the one you're
+          watching right now — was planned and built using ideate. The interview you're seeing
+          here is real. These are actual artifacts from this deck's .ideate/ directory. ideate
+          interrogated the requirements, produced guiding principles, decomposed the work into
+          work items with acceptance criteria, and the system built it."
+
+          FOR INTERNAL PRESENTATIONS: "I want to be transparent about ideate's history. I
+          started this as a personal project on my own time and resources — the frustration
+          was real and I wanted to see if I could solve it. I've been careful to keep clear
+          boundaries: the work implementation was built independently, using the architectural
+          insights but not shared code. I'm at the point where the hard CS work — PPR, graph
+          traversal, adaptive weighting — makes maintaining two versions unsustainable
+          engineering. I'd like us to evaluate the open-source version on its merits and discuss
+          how to bring this capability to the team. I think the data speaks for itself."
+        </aside>
+      </section>
+
+      <!-- Slide 36: Real Results -->
+      <section>
+        <h2>Real Results</h2>
+        <div style="max-width: 700px; margin: 0.8em auto; font-size: 0.8em; text-align: left;">
+          <div class="fragment fade-in-then-semi-out">
+            <p><span class="accent-success">&#10003;</span> &nbsp;<strong>Convergence</strong> — projects reach zero critical findings through structured feedback</p>
+          </div>
+          <div class="fragment fade-in-then-semi-out mt-1">
+            <p><span class="accent-success">&#10003;</span> &nbsp;<strong>Knowledge compounds</strong> — policies grow, rework shrinks, each cycle is cheaper</p>
+          </div>
+          <div class="fragment fade-in-then-semi-out mt-1">
+            <p><span class="accent-success">&#10003;</span> &nbsp;<strong>Autonomous operation</strong> — <code>brrr</code> runs without human intervention until done</p>
+          </div>
+          <div class="fragment fade-in mt-1">
+            <p><span class="accent-success">&#10003;</span> &nbsp;<strong>Full traceability</strong> — every decision, every change, every review is documented</p>
+          </div>
+        </div>
+        <aside class="notes">
+          ~45 seconds. "These aren't promises. They're results. Projects converge — the review
+          loop drives quality to zero critical findings. Knowledge compounds — each cycle's
+          policies make the next cycle cheaper. brrr runs autonomously. And everything is fully
+          traceable — you can follow any decision back to the interview question that triggered it."
+        </aside>
+      </section>
+
+      <!-- ============================================
+           ACT 7: CLOSE
+           ============================================ -->
+
+      <!-- Slide 37: Where This Goes -->
+      <section data-background-gradient="radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, rgba(10, 10, 15, 1) 70%)">
+        <h2>Where This Could Go</h2>
+        <div style="max-width: 700px; margin: 0.8em auto; font-size: 0.8em; text-align: left;">
+          <p class="fragment fade-in-then-semi-out">
+            <span class="accent">&#9656;</span> &nbsp;Learned edge weights from actual usage data — the graph tunes itself over time
+          </p>
+          <p class="fragment fade-in-then-semi-out mt-1">
+            <span class="accent">&#9656;</span> &nbsp;Cross-project knowledge transfer — policies that work in one codebase inform the next
+          </p>
+          <p class="fragment fade-in mt-1">
+            <span class="accent">&#9656;</span> &nbsp;Team-scale coordination — multiple engineers, one knowledge graph
+          </p>
+        </div>
+        <p class="fragment dim text-small mt-2" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+          The hard part is the retrieval. Once context quality is reliable, the scope of what AI can take on grows naturally.
+        </p>
+        <aside class="notes">
+          ~45 seconds. "There are a few directions this could go. Learned edge weights from
+          actual usage data so the graph tunes itself. Cross-project knowledge transfer.
+          Team-scale coordination. But the core insight stays the same: the hard part is
+          getting the right context. Once retrieval is principled, scope can grow naturally."
+
+          BREADCRUMB 6 (closing the journey): "This started as me being frustrated that my AI
+          tools couldn't handle anything bigger than a single feature. A year of iterations —
+          reverse prompting, DDD, PPR — and here we are. The context problem is the central
+          challenge in AI-assisted development. This is one approach. I'd love to hear about others."
+        </aside>
+      </section>
+
+      <!-- Slide 38: Get Started / Q&A -->
+      <section>
+        <div class="title-ideate" style="font-size: 3em;">ideate</div>
+        <div class="separator"></div>
+        <div class="highlight-box mt-2" style="max-width: 500px; margin-left: auto; margin-right: auto;">
+          <p class="text-small" style="margin: 0; text-align: center;">
+            <code>github.com/ideate-ai/ideate</code>
+          </p>
+        </div>
+        <p class="mt-2" style="font-size: 0.9em;">
+          <strong>Questions?</strong>
+        </p>
+        <aside class="notes">
+          ~30 seconds. Closing slide. Open for Q&A. Use overview mode (Esc) to jump to
+          specific slides if questions reference particular topics. Key slides to revisit:
+          PPR walkthrough, edge-type weighting, the brrr loop, hook system.
+
+          FOR INTERNAL PRESENTATIONS: "The ask is straightforward — evaluate ideate on its
+          engineering merits. I've invested in this because I think the context retrieval
+          problem is real and important. The best path forward for the team is one version,
+          properly maintained, with community contributions and transparency. I want to be
+          fully open about how we got here and work together on what comes next."
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Offline fallback warning (hidden by default, must be before script tags) -->
+  <div id="offline-warning" style="display:none; position:fixed; inset:0; z-index:9999;
+    background:#0a0a0f; color:#e2e8f0; align-items:center; justify-content:center;
+    flex-direction:column; font-family:Inter,sans-serif; text-align:center; padding:2em;">
+    <h2 style="color:#6366f1; margin-bottom:0.5em;">Network Required</h2>
+    <p style="max-width:500px; line-height:1.6; color:#94a3b8;">
+      This presentation loads dependencies from a CDN and requires an internet connection.
+      Please connect to a network and refresh the page.
+    </p>
+  </div>
+
+  <!-- Reveal.js Core -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"
+    onerror="document.getElementById('offline-warning').style.display='flex'"></script>
+
+  <!-- Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/math/math.js"></script>
+
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      autoAnimateEasing: 'ease-in-out',
+      autoAnimateDuration: 0.8,
+      controlsTutorial: false,
+      slideNumber: 'c/t',
+      showSlideNumber: 'speaker',
+      plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX]
+    });
+  </script>
+</body>
+</html>

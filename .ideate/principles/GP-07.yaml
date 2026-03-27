@@ -1,0 +1,14 @@
+id: GP-07
+type: guiding_principle
+name: PPR as Academic Rigor Signal
+status: active
+description: |
+  PPR is not an incremental improvement — it incorporates hard academic science
+  (graph theory, Markov chains, information retrieval) into a space dominated by
+  heuristic hacks. Present it as evidence that ideate is built on foundations that
+  scale, not prompt engineering tricks that plateau. Explain from first principles
+  so the audience understands the depth, but ground every concept in how ideate
+  actually uses it for context retrieval.
+amendment_history: []
+cycle_created: 0
+cycle_modified: null

@@ -1,0 +1,22 @@
+id: domain-index
+type: domain_index
+current_cycle: 0
+domains:
+  - name: "content"
+    description: "Slide content, narrative structure, technical accuracy, PPR explanation, and business case messaging."
+    files:
+      policies: domains/content/policies/
+      decisions: domains/content/decisions/
+      questions: domains/content/questions/
+  - name: "presentation"
+    description: "Visual design, reveal.js features, animations, theme, typography, and slide layout."
+    files:
+      policies: domains/presentation/policies/
+      decisions: domains/presentation/decisions/
+      questions: domains/presentation/questions/
+cross_cutting_concerns: |
+  Speaker notes span both domains — they contain content (talking points) delivered
+  through a presentation mechanism (reveal.js notes plugin). Changes to either domain
+  may require updating speaker notes.
+cycle_created: 0
+cycle_modified: null

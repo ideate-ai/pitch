@@ -1,0 +1,86 @@
+id: RF-revealjs-features
+type: research_finding
+topic: "Reveal.js 5.x Features for Dark-Themed Technical Pitch Deck"
+status: active
+date: "2026-03-26"
+content: |
+  ## Setup
+  - CDN-based single HTML file (recommended for portability)
+  - reveal.js 5.x: core CSS + JS via jsdelivr
+  - Plugins: highlight (code), notes (speaker), math (KaTeX)
+
+  ## Dark Theme
+  - Base: black.css theme (highest contrast, most professional)
+  - Override CSS variables: --r-background-color, --r-main-color, etc.
+  - Radial gradient background for depth: radial-gradient(ellipse, #1a1a2e 0%, #0a0a0f 70%)
+  - Google Fonts: Inter (body/headings), JetBrains Mono (code)
+
+  ## Key Features for This Deck
+
+  ### Auto-Animate (PPR walkthrough)
+  - data-auto-animate on consecutive sections
+  - Match elements via data-id attribute
+  - Smooth morphing of position, size, color, opacity
+  - Duration: 0.8s, easing: ease-in-out
+  - Code blocks auto-animate: lines morph as code changes
+
+  ### Fragments (Progressive Disclosure)
+  - fade-in-then-semi-out: best for building lists (dims previous)
+  - highlight-current-blue: focus on current item
+  - Ordered via data-fragment-index
+  - Nested fragments for compound animations
+
+  ### Code Highlighting
+  - data-line-numbers="1|2|3-4": step-by-step line highlight
+  - Non-highlighted lines dim to 35% (natural focus)
+  - Monokai theme recommended for dark backgrounds
+  - Languages: yaml, typescript, sql, json
+
+  ### KaTeX Math
+  - Inline: $formula$ or \(formula\)
+  - Block: $$formula$$ or \[formula\]
+  - Plugin: RevealMath.KaTeX
+  - Use for PPR formula, damping factor, transition matrix
+
+  ### Vertical Slides
+  - Nested section tags for 2D navigation
+  - Use for PPR step-by-step walkthrough
+  - Navigate horizontally between topics, vertically into depth
+
+  ### Speaker Notes
+  - aside.notes inside each section
+  - Press S for presenter view (current slide, next, notes, timer)
+
+  ## Layout Patterns
+  - Two-column: flexbox with gap, text-align left
+  - Code + explanation: wide column (code) + narrow column (text)
+  - Metrics display: large number + small label below
+
+  ## Diagram Options
+  - Inline SVG: maximum control, clean scaling
+  - CSS-drawn: HTML boxes + flexbox for simple flows
+  - Mermaid.js: quick diagrams with dark theme config
+
+  ## Configuration
+  ```javascript
+  Reveal.initialize({
+    hash: true,
+    transition: 'slide',
+    backgroundTransition: 'fade',
+    autoAnimateDuration: 0.8,
+    autoAnimateEasing: 'ease-in-out',
+    plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX]
+  });
+  ```
+
+  ## Anti-Patterns to Avoid
+  - Zoom transitions (gimmicky)
+  - Excessive grow/shrink fragments
+  - Parallax backgrounds (distracting)
+  - Too many vertical slides (confusing navigation)
+  - Flat black background (use subtle gradient for depth)
+
+sources:
+  - "reveal.js documentation and training knowledge through 5.x"
+cycle_created: 0
+cycle_modified: null

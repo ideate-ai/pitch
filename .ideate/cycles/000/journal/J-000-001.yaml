@@ -1,0 +1,16 @@
+id: J-000-001
+type: journal_entry
+cycle: 0
+seq: 1
+phase: plan
+date: "2026-03-26"
+summary: |
+  Planning session for ideate pitch deck. 8 interview exchanges covering audience
+  (engineering leaders + thought leaders), narrative hook (current AI is feature-level
+  and agreeable), technical focus (PPR deep dive from first principles), visual design
+  (dark theme, tasteful reveal.js features), and format (self-contained but presenter-friendly,
+  no live demo). 7 guiding principles, 6 constraints, 6 work items in a strictly sequential
+  chain (single-file project). Key architectural decision: 7-act narrative structure
+  progressing from problem to proof, with PPR as the technical centerpiece. 5 background
+  research agents spawned (ideate architecture, skills/prompts, planning docs, PPR algorithm,
+  reveal.js features).

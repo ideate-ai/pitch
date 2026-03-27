@@ -1,0 +1,110 @@
+id: WI-005
+type: work_item
+title: "Act 5-6: Integration, Hooks, and Proof Slides"
+status: pending
+complexity: medium
+scope:
+  - {path: "index.html", op: modify}
+depends: [004]
+blocks: [006]
+criteria:
+  - "4 slides for Act 5 (Integration & Teams) present in the deck following Act 4 [machine]"
+  - "4 slides for Act 6 (Proof) present in the deck following Act 5 [machine]"
+  - "Hook system slide shows a real hooks.json example with at least 2 event types [machine]"
+  - "Integration slide shows concrete examples for Jira and Slack hooks [machine]"
+  - "Dogfooding slide includes real statistics from ideate's own .ideate/ directory (59 cycles, 192 work items, 105 decisions, etc.) [machine]"
+  - "Meta-narrative slide references this deck being built with ideate [machine]"
+  - "Metrics slide shows at least one concrete metric type (cost-quality, token efficiency, or convergence rate) [human]"
+  - "Speaker notes present on every slide [machine]"
+  - "Statistics and numbers are visually prominent using the .stat-number CSS class [human]"
+module: null
+domain: null
+notes: |
+  # WI-005: Act 5-6 — Integration and Proof
+
+  ## Objective
+  Create 8 slides covering ideate's integration capabilities (hook system, existing
+  process fit) and proof of results (dogfooding stats, meta-narrative, real metrics).
+
+  ## Implementation Notes
+
+  ### Act 5: Integration & Teams
+
+  **Slide 29: Your Process, Supercharged**
+  - ideate doesn't replace your workflow — it enhances it
+  - Diagram showing ideate alongside existing tools:
+    - Git (version control) ← ideate manages branches/worktrees
+    - CI/CD (testing) ← ideate's review runs your test suite
+    - Issue tracker (planning) ← ideate syncs via hooks
+    - Chat (communication) ← ideate notifies via hooks
+  - "ideate meets you where you are"
+
+  **Slide 30: The Hook System**
+  - Show hooks.json example:
+    ```json
+    {
+      "hooks": [
+        {
+          "event": "work_item.completed",
+          "type": "command",
+          "value": "curl -X POST ...",
+          "enabled": true
+        }
+      ]
+    }
+    ```
+  - List event types with fragments:
+    - plan.complete, work_item.started, work_item.completed
+    - review.finding, review.complete
+    - cycle.converged, andon.triggered
+  - "Seven event types. Shell commands or template strings. Variable substitution."
+
+  **Slide 31: Jira, Slack, and Beyond**
+  - Two concrete examples:
+  - Jira: on work_item.completed → create/update Jira issue, transition status
+  - Slack: on review.complete → post summary to #engineering channel
+  - Show the actual curl/webhook command templates
+  - "Any tool with an API. Any workflow with events."
+
+  **Slide 32: Metrics & Observability**
+  - Token efficiency: criteria_passed / input_tokens
+  - Cost-quality curve: optimal context budget
+  - Cache hit rates by phase
+  - Finding survival rate across cycles
+  - "Know exactly what your AI spend buys you"
+
+  ### Act 6: Proof
+
+  **Slide 33: Eating Our Own Dog Food**
+  - "ideate built itself"
+  - Show the numbers with .stat-number styling:
+    - 59 evaluation cycles
+    - 192 work items
+    - 1,161 YAML artifacts
+  - "The most thorough test of any tool is using it to build itself"
+
+  **Slide 34: By the Numbers**
+  - More stats from ideate's .ideate/ directory:
+    - 13 guiding principles
+    - 16 constraints
+    - 105 settled decisions
+    - 32 policies
+    - 18 research findings
+    - 80 tracked questions
+  - "Every decision documented. Every question tracked. Nothing lost."
+
+  **Slide 35: This Deck**
+  - Meta-narrative reveal:
+  - "This presentation was planned and built using ideate"
+  - Show a snippet from THIS deck's .ideate/ planning artifacts
+  - "The tool that plans projects planned this pitch"
+  - Should feel like a satisfying reveal
+
+  **Slide 36: Real Results**
+  - Convergence: projects reach zero critical findings
+  - Knowledge accumulation: policies grow, rework shrinks
+  - Autonomous operation: brrr runs without human intervention
+  - "Not promises. Results."
+
+cycle_created: 0
+cycle_modified: null

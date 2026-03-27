@@ -1,0 +1,10 @@
+id: D-2
+type: decision
+domain: "content"
+title: "PPR Presented as Shipped Feature"
+decision: "PPR is presented as a fully implemented, shipping feature — not a roadmap item."
+rationale: "User confirmed implementation will be complete by presentation time. Framing as shipped maximizes credibility and impact."
+source: "interviews/interview-plan-001.yaml#IQ-plan-001-004"
+status: settled
+cycle_created: 0
+cycle_modified: null

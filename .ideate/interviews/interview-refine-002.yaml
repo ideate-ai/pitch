@@ -1,0 +1,36 @@
+id: interview-refine-002
+type: interview
+cycle_created: 2
+phase: refine
+date: "2026-03-26"
+context: "Major copy and structural refinement. User reviewed every slide and provided specific feedback on tone, readability, PPR grounding, and structural redundancy."
+entries:
+  - id: IQ-refine-002-001
+    question: "What changes do you want to make?"
+    answer: |
+      Comprehensive slide-by-slide feedback covering:
+      - Slides 2+3: redundant, merge. Drop Aider. Be honest about limitation: capable pair programming partner for individual tasks, very low upper bound on task size. Built skills/agents to address overagreeability which improved quality but not scale.
+      - Slide 5: memory exists in agents, just topical and limited. Doesn't work for domain knowledge, preferences, procedures.
+      - Slide 6: too profound, be humble about ideate's goal (plan/execute at larger scale).
+      - Slide 7: "multiple perspectives" not "three independent perspectives". Merge with slide 8 (remove brrr mention, name is silly).
+      - Slide 10: title too grand, "trigger words" sounds like pattern matching. Should convey filling gaps to reduce hallucinations.
+      - Slide 11: column layout (code + DDD blurb side by side).
+      - Slide 13: text unreadable, too small. Use columns.
+      - Slide 15: "Three perspectives. Not a rubber stamp" too grand. Lean into persona-specific context.
+      - Slide 17: numbers/text cut off at bottom of screen.
+      - Slide 18: title clunky, subtitle bold. Should convey scaling when context windows are small.
+      - Slide 20: knowledge graph description too abstract. State plainly what it does.
+      - Slide 22: PPR edges should be more topical (not "governed_by").
+      - Slide 23: "surfer" jargon. Plain language without graph theory terms.
+      - Slide 24: anchor math around relevance, not "time surfer spends."
+      - Slide 26: should compare to BFS more prominently, not as afterthought.
+      - Slide 30: build up to BFS having been tried first.
+      - Slide 31: "I think this matters" sounds weak. Need grounding on why efficient traversal matters.
+      - Slide 32: "Your Process, Supercharged" is marketing. Git/CI/Jira/Slack diagram doesn't flow.
+      - Slide 33: good layout, text too small.
+      - Slide 40: marketing language, rewrite or remove.
+      - Slide 41: remove subtitle, keep simple.
+
+      Holistic sentiment: read everything and apply the tone/readability fixes across all slides.
+    domain: null
+    seq: 1

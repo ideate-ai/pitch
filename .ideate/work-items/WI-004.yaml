@@ -1,0 +1,140 @@
+id: WI-004
+type: work_item
+title: "Act 4: PPR Deep Dive — Knowledge Graph and Personalized PageRank"
+status: pending
+complexity: high
+scope:
+  - {path: "index.html", op: modify}
+depends: [003]
+blocks: [005]
+criteria:
+  - "10 slides for Act 4 present in the deck following Act 3 [machine]"
+  - "PPR section uses vertical slides for the step-by-step graph walkthrough [machine]"
+  - "At least 3 slides contain KaTeX-rendered mathematical notation [machine]"
+  - "The PPR formula is displayed correctly: π = αs + (1-α)Mπ where s is seed vector, M is transition matrix, α is damping factor [machine]"
+  - "A graph diagram with at least 6 nodes shows ideate's artifact graph (work item, module, policy, research, finding nodes) [machine]"
+  - "Auto-animate is used to show probability distribution changing across at least 3 graph states [machine]"
+  - "Edge-type weighting table shows different weights for execute/review/plan tasks across edge types [machine]"
+  - "Comparison slide contrasts PPR retrieval with naive approaches (keyword, embedding-only, BFS) [human]"
+  - "HippoRAG NeurIPS 2024 results cited: 10-20x cheaper, 6-13x faster than iterative retrieval [machine]"
+  - "The explanation builds from intuition to formalism — random surfer first, then math [human]"
+  - "An engineer unfamiliar with PPR would understand the algorithm after reading these slides [human]"
+  - "Speaker notes on every slide explain the concept in more detail for self-contained reading [machine]"
+module: null
+domain: null
+notes: |
+  # WI-004: Act 4 — PPR Deep Dive
+
+  ## Objective
+  Create 10 slides that explain Personalized PageRank from first principles for an
+  engineering audience that has never heard of the algorithm, then show how ideate
+  uses it for context retrieval. This is the technical showpiece of the deck.
+
+  ## Implementation Notes
+
+  ### Slide 17: The Context Problem
+  - "LLM output quality is bounded by context quality"
+  - Show the problem: agent needs to implement WI-042
+  - What context does it need? Module spec? Domain policies? Prior findings? Dependencies?
+  - Naive approach: dump everything → token waste, "lost in the middle" effect
+  - Smart approach: retrieve exactly what's relevant → but how?
+  - Fragment reveal building the question
+
+  ### Slide 18: ideate's Knowledge Graph
+  - CSS/SVG diagram of the artifact graph
+  - Node types shown: work_item, module, domain_policy, research, finding, guiding_principle, constraint, decision, question
+  - Edge types labeled: depends_on, belongs_to, governed_by, derived_from, informed_by, has_findings
+  - "12 node types. 10 edge types. SQLite backbone."
+  - Show a small subgraph: WI-042 → Module:auth → Policy:P-07 → GP-01
+  - "Every artifact is a node. Every relationship is an edge."
+
+  ### Slide 19: PageRank — The Original Insight
+  - Brief history: Google, 1998, ranking web pages
+  - The random surfer model:
+    - Imagine someone clicking random links on the web
+    - Pages that get visited more often are more important
+    - Pages linked by many important pages are themselves important
+  - Simple diagram: 4-5 web page nodes with edges, showing visit frequency
+  - "PageRank finds the pages the surfer visits most in the long run"
+  - Key insight: importance is recursive — it flows through the graph
+
+  ### Slide 20: From Web to Knowledge
+  - "The same math works for any graph"
+  - Web pages → SDLC artifacts
+  - Hyperlinks → dependency edges, governance edges, membership edges
+  - "Which artifacts are most important for THIS task?"
+  - But standard PageRank gives global importance — we need local relevance
+  - Transition: "We need to personalize the walk"
+
+  ### Slide 21: Personalized PageRank
+  - The key modification: the surfer has a "home" node (the seed)
+  - At each step: follow a random edge with probability (1-α), or teleport home with probability α
+  - α = damping factor (typically 0.15)
+  - Result: nodes near the seed get more visits than distant nodes
+  - But structurally important nodes still surface (just biased toward the seed's neighborhood)
+  - Diagram: same graph but now with a highlighted seed node and probability heat map
+  - "The surfer always comes home. Nearby nodes score higher."
+
+  ### Slide 22: The Math (KaTeX)
+  - Build the formula with fragments:
+  - First: "The stationary distribution π tells us where the surfer spends time"
+  - Then: π = αs + (1-α)Mπ
+  - Where:
+    - π = probability distribution over all nodes (what we want)
+    - s = seed vector (1.0 on the starting work item, 0 elsewhere)
+    - M = transition matrix (edge weights, normalized)
+    - α = teleportation probability (how often the surfer goes home)
+  - "Iterate until convergence. The result ranks every artifact by relevance to your seed."
+  - Show convergence: after ~20 iterations, the distribution stabilizes
+  - Keep it clean — the formula on one side, plain-English explanation on the other
+
+  ### Slide 23-25: Walking the Graph (Vertical Slides with Auto-Animate)
+  - Use vertical slides to step through a concrete example
+  - Graph: 7 nodes representing a real ideate scenario
+    - Seed: WI-042 (implement auth middleware)
+    - 1 hop: Module:auth, WI-041 (dependency)
+    - 2 hops: Policy:P-07 (security), Policy:P-01 (spec sufficiency)
+    - 3 hops: GP-01 (guiding principle), Research:RF-auth-patterns
+    - Distant: WI-099 (unrelated), Research:RF-storage (unrelated)
+
+  - **Step 1**: Start at WI-042. All probability mass on seed. Show node highlighted.
+  - **Step 2**: After first walk step. Probability spreads to neighbors. Module:auth and WI-041 light up.
+  - **Step 3**: After several iterations. Heat map shows: WI-042 (highest), Module:auth (high), Policy:P-07 (medium-high), WI-041 (medium), GP-01 (lower), RF-auth (low). WI-099 and RF-storage are cold.
+  - **Step 4**: Final distribution. Top-5 nodes selected for context. Unrelated nodes pruned.
+
+  - Use auto-animate to morph the node colors/sizes between steps
+  - Node size = probability mass. Color intensity = relevance score.
+
+  ### Slide 26: Edge-Type Weighting
+  - "Not all edges are equal"
+  - Table from ideate's research:
+    | Edge Type | Execute | Review | Plan |
+    | depends_on | 1.0 | 0.4 | 0.6 |
+    | governed_by | 0.9 | 1.0 | 0.8 |
+    | belongs_to | 0.8 | 0.7 | 0.5 |
+    | informed_by | 0.3 | 0.3 | 0.9 |
+    | has_findings | 0.2 | 1.0 | 0.5 |
+  - "When executing: dependencies matter most. When reviewing: findings matter most."
+  - "The same graph, different walks, different context."
+
+  ### Slide 27: vs. Naive Retrieval
+  - Comparison: three columns
+  - Keyword/BFS: "Dump everything within 2 hops" → too much noise, misses important distant nodes
+  - Embedding similarity: "Find similar text" → misses structural relationships, no multi-hop
+  - PPR: "Walk the graph with structural awareness" → right context, right amount
+  - HippoRAG results:
+    - 10-20x cheaper than iterative retrieval
+    - 6-13x faster
+    - Comparable or better quality
+  - "One computation pass. No iteration. No LLM calls for retrieval."
+
+  ### Slide 28: Not Heuristics — Science
+  - "This isn't prompt engineering. This is graph theory."
+  - Grounded in: Markov chains, stationary distributions, spectral graph theory
+  - Published at: NeurIPS 2024 (HippoRAG), used by Aider, Sourcegraph Cody
+  - ideate applies it to SDLC artifact graphs with edge-type weighting
+  - "The foundation scales. The heuristics plateau."
+  - This slide should feel like a mic-drop moment
+
+cycle_created: 0
+cycle_modified: null

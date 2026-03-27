@@ -1,0 +1,77 @@
+id: RF-ppr-algorithm
+type: research_finding
+topic: "Personalized PageRank Algorithm — Deep Dive for Presentation"
+status: active
+date: "2026-03-26"
+content: |
+  Comprehensive PPR research for the pitch deck. Key findings organized by slide needs:
+
+  ## PageRank Basics (Slide 19)
+  - Random surfer model: imagine clicking random links on the web
+  - Pages visited more often are more important
+  - Importance is recursive — flows through the graph
+  - Core formula: π = (1-α)Mπ + αe (where e is uniform vector)
+
+  ## PPR Modification (Slides 20-21)
+  - Personalization vector replaces uniform teleportation
+  - Surfer teleports back to seed nodes (not random pages)
+  - Result: scores biased toward seed's neighborhood
+  - α (damping/teleportation) controls exploration radius:
+    - α=0.05: deep exploration, distant nodes still score
+    - α=0.15: standard, good balance
+    - α=0.30: tight neighborhood, mostly 1-2 hops
+
+  ## The Math (Slide 22)
+  - Iterative formula: π = αs + (1-α)Mπ
+  - π = stationary probability distribution (what we want)
+  - s = seed/personalization vector (1.0 on seed, 0 elsewhere)
+  - M = column-stochastic transition matrix (edge weights, normalized)
+  - α = teleportation probability (0.15 typical)
+  - Converges in ~20 iterations for small graphs
+  - Closed form: π = α(I - (1-α)M)⁻¹s
+
+  ## Why PPR for Retrieval (Slide 27)
+  - Multi-hop discovery: finds relevant nodes multiple hops away
+  - Hub dampening: high-degree nodes don't dominate (analogous to IDF)
+  - Contextual: same graph, different seed = different rankings
+  - Smooth falloff: probability decays naturally with distance (no arbitrary cutoff)
+  - vs. BFS: BFS gives binary in/out; PPR gives graded relevance
+
+  ## HippoRAG (NeurIPS 2024) (Slides 27-28)
+  - Applied PPR to RAG over knowledge graphs
+  - Key results: 10-20x cheaper, 6-13x faster than iterative retrieval (IRCoT)
+  - Comparable or better quality on multi-hop QA benchmarks
+  - Node specificity (IDF-weighted seeds) prevents hub domination
+  - Neuroscience-inspired: models hippocampal pattern completion
+
+  ## Concrete Walkthrough (Slides 23-25)
+  - 7-node graph example suitable for slides:
+    - Seed: WI-042 (implement auth middleware)
+    - 1-hop: Module:auth (0.35), WI-041/dependency (0.15)
+    - 2-hop: Policy:P-07/security (0.12), Policy:P-01 (0.08)
+    - 3-hop: GP-01 (0.04), Research:RF-auth (0.03)
+    - Distant: WI-099/unrelated (0.001)
+  - Show probability mass shifting across iterations
+  - Use node size = probability, color intensity = score
+
+  ## vs. Simpler Methods (Slide 27)
+  | Method | Multi-hop | Hub Handling | Contextual | Cost |
+  | Keyword/BFS | Binary reach | None | No | O(nodes) |
+  | Embeddings | No structure | No structure | Yes | O(n·d) |
+  | N-hop BFS | Hard cutoff | None | Partial | O(edges^N) |
+  | PPR | Smooth decay | IDF-like | Yes (seed) | O(edges/ε) |
+
+  ## Edge-Type Weighting (Slide 26)
+  - Static weights per task type (execution/review/planning)
+  - Implemented as weighted transition matrix: M[i][j] *= w(edge_type)
+  - Start with hand-tuned weights, calibrate from citation logs
+  - Four approaches: static → query-dependent → learned → multi-relational matrix
+
+sources:
+  - "Brin & Page 1998 — The PageRank Citation Ranking"
+  - "Haveliwala 2002 — Topic-Sensitive PageRank"
+  - "Andersen, Chung & Lang 2006 — Local Graph Partitioning using PPR"
+  - "HippoRAG NeurIPS 2024 — Neurobiologically Inspired Long-Term Memory for LLMs"
+  - "ideate research: RF-context-assembly-strategies.yaml"
+cycle_created: 0
+cycle_modified: null

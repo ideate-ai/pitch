@@ -1,0 +1,53 @@
+id: interview-refine-001
+type: interview
+cycle_created: 1
+phase: refine
+date: "2026-03-26"
+context: "Post-review correction cycle addressing 3 critical and 8 significant findings from cycle 001 review, plus 4 new requirements from user."
+entries:
+  - id: IQ-refine-001-001
+    question: "Review findings exist from cycle 001. Are you here to address those findings, to make other changes, or both?"
+    answer: "All findings, plus several new issues."
+    domain: null
+    seq: 1
+  - id: IQ-refine-001-002
+    question: "What are the new issues?"
+    answer: |
+      1. Tone is too strong. Wants to be more humble — an engineer who made a tool, not Steve Jobs.
+         Let the facts speak for themselves. But confident the idea 'has teeth' and is onto something big.
+      2. Guiding principles/policy section needs more attention. Wants to create a link to DDD,
+         traditional software development, and agile best practices. Not deep implementation details,
+         but showing the connection to established practices is powerful.
+      3. Evolution story: frustrated by plan mode only handling small features → built reverse prompting
+         interview tool for larger work → worked well but insanely expensive because evaluating all
+         previous decisions → introduced DDD bounded context and domain mapping → still had LLM cost
+         issues → serious research and engineering to get to current state with PPR.
+      4. Ownership sensitivity (speaker notes only): personal project on own time and money. Reimplemented
+         at work using research and learning. Now can't maintain parallel work-owned branch due to hard CS.
+         OSS project, wants work approval. Must be honest but sensitive, positive framing, no legal
+         language or adversarial tone.
+    domain: null
+    seq: 2
+  - id: IQ-refine-001-003
+    question: "For the evolution story — where does it fit in the narrative?"
+    answer: |
+      Don't remove the dogfooding reveal — it's a compelling plot twist. Not good at dramatic pacing,
+      wants us to figure out thematic organization. Doesn't have to happen all at once — can put flavor
+      throughout if it makes the pitch better.
+    domain: content
+    seq: 3
+  - id: IQ-refine-001-004
+    question: "For the ownership framing — which slide should carry the speaker notes?"
+    answer: |
+      Very sensitive topic. Not sure how to broach it with care and respect. Wants positive framing.
+      Has been very careful to use own money and time. Doesn't want to cede ownership but also not
+      come across as hostile or introduce liability/legal considerations. Doesn't need to dwell on it
+      but must be honest.
+    domain: content
+    seq: 4
+  - id: IQ-refine-001-005
+    question: "Any other issues?"
+    answer: |
+      Code snippets render very small and are hard to read. Also, the graph slide doesn't show edges.
+    domain: presentation
+    seq: 5

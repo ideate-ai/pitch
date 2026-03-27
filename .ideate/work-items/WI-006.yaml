@@ -1,0 +1,76 @@
+id: WI-006
+type: work_item
+title: "Act 7: Closing Slides, Speaker Notes Polish, and Animation Refinement"
+status: pending
+complexity: medium
+scope:
+  - {path: "index.html", op: modify}
+depends: [005]
+blocks: []
+criteria:
+  - "2 slides for Act 7 (Close) present as the final slides in the deck [machine]"
+  - "Closing slide includes a clear call to action (how to get/try ideate) [human]"
+  - "Every slide in the entire deck has speaker notes with talking points [machine]"
+  - "Speaker notes include approximate timing guidance (e.g., '~1 min' or '~90 sec') [machine]"
+  - "Auto-animate transitions are applied to the PPR graph walkthrough slides [machine]"
+  - "Fragment animations are applied throughout for progressive disclosure [machine]"
+  - "Section divider slides (between acts) have gradient backgrounds [machine]"
+  - "Overall slide count is between 30 and 45 [machine]"
+  - "Total estimated presentation time based on speaker notes is 20-30 minutes [human]"
+  - "The complete deck feels cohesive — visual style, narrative flow, and pacing are consistent throughout [human]"
+  - "Opening in a browser works without any server or build step — just open index.html [machine]"
+module: null
+domain: null
+notes: |
+  # WI-006: Act 7 + Final Polish
+
+  ## Objective
+  Create the closing slides and perform a final polish pass across the entire deck:
+  speaker notes completion, animation refinement, timing calibration, and visual
+  consistency.
+
+  ## Implementation Notes
+
+  ### Act 7 Slides
+
+  **Slide 37: The Future of Development**
+  - Vision statement: "From AI assistant to AI engineer"
+  - The trajectory: autocomplete → task completion → feature implementation → project management
+  - ideate is the next step on this trajectory
+  - "Not replacing engineers. Amplifying them."
+  - Aspirational but grounded — this is happening now, not someday
+
+  **Slide 38: Get Started / Q&A**
+  - How to install/try ideate
+  - Key links (if applicable)
+  - "Questions?" with contact info
+  - Clean, minimal closing slide
+  - Thank the audience
+
+  ### Speaker Notes Pass
+  - Review every slide's speaker notes for:
+    - Completeness (every slide has notes)
+    - Timing guidance (target per slide)
+    - Key talking points (what to emphasize verbally)
+    - Transition cues (how to introduce the next slide)
+  - Total timing should add up to 20-30 minutes
+  - Notes should be detailed enough that someone unfamiliar could present
+
+  ### Animation Polish
+  - PPR walkthrough: verify auto-animate morphs between graph states smoothly
+  - Fragment reveals: ensure all progressive disclosure animations work
+  - Code highlighting: verify syntax colors render correctly for yaml, typescript, sql
+  - Section dividers: gradient backgrounds transition smoothly
+  - No animation should feel jarring or gratuitous
+
+  ### Final Checks
+  - Open index.html directly in Chrome, Firefox, Safari — verify rendering
+  - Check KaTeX formulas render (not showing raw LaTeX)
+  - Check all CDN resources load (test with network tab)
+  - Verify S key opens presenter view with notes
+  - Verify overview mode (Esc key) works for navigation
+  - Check slide count is in the 30-45 range
+  - Read through the entire deck as a standalone document
+
+cycle_created: 0
+cycle_modified: null

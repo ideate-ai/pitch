@@ -1,0 +1,10 @@
+id: D-5
+type: decision
+domain: "presentation"
+title: "Single HTML File Delivery"
+decision: "The entire presentation is a single index.html file with CDN-loaded dependencies and embedded CSS."
+rationale: "Maximum portability — anyone with the file can open it in a browser. No build step, no npm, no server. CDN handles heavy assets."
+source: "plan/architecture.yaml"
+status: settled
+cycle_created: 0
+cycle_modified: null

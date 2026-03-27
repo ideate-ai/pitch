@@ -1,0 +1,11 @@
+id: P-4
+type: policy
+domain: "presentation"
+title: "Animations Serve Comprehension"
+rule: "Every animation (fragment, auto-animate, transition) must aid understanding through progressive disclosure. No decorative animations."
+derived_from: "GP-04 (Tasteful Visual Polish)"
+established: planning phase
+status: active
+amended_by: null
+cycle_created: 0
+cycle_modified: null

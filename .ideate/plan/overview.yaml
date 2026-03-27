@@ -1,0 +1,23 @@
+id: overview
+type: module
+title: "ideate Pitch Deck — Refinement Cycle 2"
+summary: |
+  Major copy and structural refinement driven by slide-by-slide user review.
+
+  Trigger: User reviewed every slide and provided detailed feedback on tone,
+  readability, structural redundancy, and PPR section grounding.
+
+  Key themes:
+  1. Tone deflation — remove marketing language, write like an engineer showing a tool
+  2. PPR grounding — build from BFS (obvious approach) to PPR (principled solution),
+     drop graph theory jargon, anchor in "getting relevant context"
+  3. Readability — column layouts, text sizing, overflow fixes
+  4. Structure — merge redundant slides (2+3, 7+8), rewrite marketing slides (32, 40, 41)
+
+  Scope: All changes modify index.html. Architecture, principles, constraints unchanged.
+
+  What is NOT changing: Color palette, typography, CDN dependencies, overall 7-act
+  narrative structure (though individual acts may lose slides from merging).
+
+cycle_created: 2
+cycle_modified: null

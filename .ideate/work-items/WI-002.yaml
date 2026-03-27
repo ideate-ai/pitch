@@ -1,0 +1,93 @@
+id: WI-002
+type: work_item
+title: "Act 1-2: Problem Statement and Vision Slides"
+status: pending
+complexity: medium
+scope:
+  - {path: "index.html", op: modify}
+depends: [001]
+blocks: [003]
+criteria:
+  - "5 slides for Act 1 (The Problem) present in the deck in correct order [machine]"
+  - "3 slides for Act 2 (The Vision) present in the deck following Act 1 [machine]"
+  - "Title slide includes ideate name with tagline conveying full-SDLC AI management [machine]"
+  - "Problem slides use fragment animations to progressively reveal pain points [machine]"
+  - "At least one slide contains a concrete comparison between current AI tools (feature-level) and ideate's approach (project-level) [human]"
+  - "The Yes-Machine Problem slide includes a real or realistic example of an AI blindly following instructions vs ideate pushing back [human]"
+  - "SDLC loop diagram (plan → execute → review → refine) uses auto-animate or SVG to show the cycle visually [human]"
+  - "Section divider slide with gradient background introduces Act 2 [machine]"
+  - "Speaker notes present on every slide with talking points [machine]"
+  - "Narrative flow is compelling — audience recognizes the problem before seeing the solution [human]"
+module: null
+domain: null
+notes: |
+  # WI-002: Act 1-2 — Problem Statement and Vision
+
+  ## Objective
+  Create the opening 8 slides that establish the problem (current AI tools are
+  feature-level and agreeable) and introduce ideate's vision (full SDLC management
+  with critical analysis).
+
+  ## Implementation Notes
+
+  ### Act 1 Slides (The Problem)
+
+  **Slide 1: Title**
+  - "ideate" in large type with custom styling
+  - Tagline: something like "AI That Manages Projects, Not Just Tasks"
+  - Subtitle: presenter name, date
+  - Clean, minimal, dark background with subtle accent
+
+  **Slide 2: The AI Coding Revolution**
+  - What exists today: Copilot, Cursor, Aider, Claude Code
+  - They're transformative for individual tasks
+  - Fragment reveal: "Generate a function" ✓ "Fix a bug" ✓ "Refactor a file" ✓
+  - Then: "Manage a project?" with a visual pause/question
+
+  **Slide 3: Still Thinking Small**
+  - Two-column: "What AI Does Today" vs "What Projects Need"
+  - Left: implement features, answer questions, generate code
+  - Right: plan architecture, enforce consistency, accumulate knowledge, critical review
+  - The gap between columns IS the problem
+
+  **Slide 4: The Yes-Machine Problem**
+  - Show an example of an AI blindly agreeing with a bad idea
+  - Example: user says "let's store passwords in plaintext for simplicity"
+  - AI assistant: "Sure! Here's how to store passwords in plaintext..."
+  - ideate: "This violates security constraints. Passwords must be hashed with bcrypt..."
+  - Use code-style formatting to make this feel real
+
+  **Slide 5: What's Missing**
+  - Fragment list building to the answer:
+    - "Structured feedback loops" → knowledge decays between sessions
+    - "Critical analysis" → AI agrees with everything
+    - "Project-level context" → each task starts from zero
+    - "Knowledge accumulation" → decisions are forgotten
+  - These build to: "We need an AI that manages the full SDLC"
+
+  ### Act 2 Slides (The Vision)
+
+  **Slide 6: Section Divider**
+  - Gradient background (primary → secondary accent)
+  - "What if AI could manage a project?"
+  - Minimal text, maximum impact
+
+  **Slide 7: Introducing ideate**
+  - One-line elevator pitch
+  - "A Claude Code plugin that plans, executes, reviews, and refines — managing
+    the full software development lifecycle with the rigor of a senior engineer."
+  - Key differentiators as fragment list:
+    - Interrogates requirements instead of accepting them
+    - Accumulates domain knowledge across cycles
+    - Critically reviews its own output
+    - Converges on quality through structured feedback
+
+  **Slide 8: The Full SDLC Loop**
+  - Circular/cycle diagram: Plan → Execute → Review → Refine → (back to Execute or Converge)
+  - Use auto-animate to build the cycle step by step
+  - Each node in the cycle has a one-line description
+  - The brrr loop: "Run this autonomously until convergence"
+  - This is the anchor visual — the audience should remember this diagram
+
+cycle_created: 0
+cycle_modified: null

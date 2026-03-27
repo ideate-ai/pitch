@@ -1,0 +1,7 @@
+id: C-05
+type: constraint
+category: design
+status: active
+description: "Output is saved in the project directory /Users/dan/code/ideate-demo/. All assets (CSS, images, SVGs) are either inline or CDN-referenced."
+cycle_created: 0
+cycle_modified: null

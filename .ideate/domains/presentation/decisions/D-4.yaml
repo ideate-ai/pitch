@@ -1,0 +1,10 @@
+id: D-4
+type: decision
+domain: "presentation"
+title: "Dark Theme with Custom Branding"
+decision: "Dark theme based on reveal.js black theme with custom color palette (indigo/cyan accents on near-black background)."
+rationale: "User preference for dark theme. No existing branding exists, so designing from scratch with colors that feel technical and sophisticated."
+source: "interviews/interview-plan-001.yaml#IQ-plan-001-005"
+status: settled
+cycle_created: 0
+cycle_modified: null

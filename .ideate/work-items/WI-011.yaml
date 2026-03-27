@@ -1,0 +1,85 @@
+id: WI-011
+type: work_item
+title: "Structural Changes: Merge Slides, Restructure PPR Section, Remove Marketing"
+status: pending
+complexity: high
+scope:
+  - {path: "index.html", op: modify}
+depends: []
+blocks: [012, 013]
+criteria:
+  - "Slides 2 and 3 are merged into a single slide about the limitation (capable for individual tasks, low upper bound on size) [machine]"
+  - "No reference to Aider in the deck [machine]"
+  - "Slides 7 and 8 are merged — ideate intro includes the SDLC loop, no separate brrr slide in Act 2 [machine]"
+  - "The word 'brrr' does not appear before Act 3 [machine]"
+  - "Slide 5 (What's Missing) acknowledges that memory exists but is topical/limited [machine]"
+  - "Act 2 section divider (What if AI could manage a project) is rewritten to be humbler [human]"
+  - "The PPR section builds from BFS as a considered-and-insufficient approach before introducing PPR [human]"
+  - "The comparison slide (Why PPR Wins) gives BFS prominent treatment, not as an afterthought [human]"
+  - "Slide 40 (Future of Development) is either removed or rewritten without marketing language [machine]"
+  - "Slide 41 (closing) has no subtitle for ideate [machine]"
+  - "Slide 32 (integration) title is not 'Your Process, Supercharged' [machine]"
+  - "Total slide count is between 30 and 42 [machine]"
+module: null
+domain: content
+notes: |
+  # WI-011: Structural Changes
+
+  ## Objective
+  Merge redundant slides, restructure the PPR section to build from BFS, and remove
+  marketing language from structural elements.
+
+  ## Implementation Notes
+
+  ### Merge Slides 2+3 (AI Revolution + Still Thinking Small)
+  Replace with a single slide. The audience knows AI tools exist. Focus on:
+  - "These tools are capable pair programming partners for individual tasks"
+  - "But they hit a wall on anything larger — a very low upper bound on task size"
+  - "I built skills and agents to address overagreeability, which improved code quality,
+    but did nothing to address how much work they could take on"
+  - Drop the two-column "What AI Does / What Projects Need" — too superficial
+  - Drop Aider reference (user hasn't used it)
+
+  ### Merge Slides 7+8 (Introducing ideate + SDLC Loop)
+  Combine into one slide:
+  - ideate intro with elevator pitch
+  - Show the SDLC loop (Plan → Execute → Review → Refine) on the same slide
+  - Do NOT mention brrr yet — save for Act 3
+  - Use "multiple perspectives" not "three independent perspectives"
+
+  ### Slide 5 (What's Missing) — Memory Fix
+  Change "Knowledge decays between sessions. Every task starts from zero" to something
+  more accurate: "Memory exists but it's topical and limited — it doesn't capture domain
+  knowledge, team preferences, or established procedures"
+
+  ### Slide 6 (Section Divider) — Humble
+  Instead of "What if AI could manage a project?" try something more specific:
+  "What if AI could plan and execute at a larger scale?" or "Beyond single tasks"
+
+  ### PPR Section — BFS Progression
+  The current flow: Context Problem → Knowledge Graph → PageRank → From Web to
+  Knowledge → PPR → Math → Walking Graph → Edge Weighting → Why PPR Wins → Foundations
+
+  Restructure so BFS is introduced FIRST as the obvious approach, then shown to be
+  insufficient, then PPR presented as the solution:
+  - "The obvious approach: BFS — walk N hops from the seed" (show the problem: explosion,
+    hard cutoffs, no ranking)
+  - "What if the graph could rank nodes for us?" → introduce PPR
+  - The comparison slide should contrast BFS (tried it, here's why it's not enough)
+    with PPR (here's what it gives you)
+
+  ### Slide 32 — Integration Title
+  Replace "Your Process, Supercharged" with something like "Works With Your Tools"
+  or "Fits Your Existing Workflow". Redesign the diagram to flow better.
+
+  ### Slide 40 — Future of Development
+  The timeline (autocomplete 2021, task completion 2023, etc.) feels marketing.
+  Options: (a) remove entirely, (b) rewrite to be a plain statement about where
+  this approach could go, understated. User preference: simple and understated.
+
+  ### Slide 41 — Closing
+  Remove the subtitle "AI That Manages Projects, Not Just Tasks" — it sounds like
+  a tagline. Just show "ideate", the GitHub URL, and "Questions?"
+
+cycle_created: 2
+cycle_modified: null

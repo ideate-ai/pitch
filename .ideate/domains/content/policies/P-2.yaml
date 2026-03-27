@@ -1,0 +1,11 @@
+id: P-2
+type: policy
+domain: "content"
+title: "PPR Explained From First Principles"
+rule: "The PPR section must build from intuition (random surfer) to formalism (the math) — never present the formula without the plain-English explanation first."
+derived_from: "GP-07 (PPR as Academic Rigor Signal)"
+established: planning phase
+status: active
+amended_by: null
+cycle_created: 0
+cycle_modified: null

@@ -1,0 +1,10 @@
+id: D-1
+type: decision
+domain: "content"
+title: "7-Act Narrative Structure"
+decision: "The deck follows a 7-act arc: Problem → Vision → How It Works → PPR Deep Dive → Integration → Proof → Close."
+rationale: "Mirrors classic persuasion structure (problem-agitate-solve) with technical depth in the middle that builds credibility for the business case bookends."
+source: "interviews/interview-plan-001.yaml#IQ-plan-001-006"
+status: settled
+cycle_created: 0
+cycle_modified: null

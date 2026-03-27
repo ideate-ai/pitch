@@ -1,0 +1,12 @@
+id: GP-02
+type: guiding_principle
+name: Self-Contained but Presenter-Friendly
+status: active
+description: |
+  Every slide must work in two modes: as a visual aid for a live speaker, and as a
+  standalone artifact someone reads without narration. This means slides carry enough
+  text to convey the point independently, but are not walls of text. Speaker notes
+  supplement with delivery guidance. Visual hierarchy does the heavy lifting.
+amendment_history: []
+cycle_created: 0
+cycle_modified: null

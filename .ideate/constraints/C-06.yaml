@@ -1,0 +1,7 @@
+id: C-06
+type: constraint
+category: technology
+status: active
+description: "KaTeX required for mathematical notation in PPR section. Reveal.js math plugin loaded via CDN."
+cycle_created: 0
+cycle_modified: null

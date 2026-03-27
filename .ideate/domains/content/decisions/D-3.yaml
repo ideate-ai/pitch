@@ -1,0 +1,10 @@
+id: D-3
+type: decision
+domain: "content"
+title: "No Live Demo"
+decision: "No live demo sections. All examples are static code snippets, YAML excerpts, and diagrams embedded in slides."
+rationale: "Live demos are too slow for the presentation format. Static examples are more reliable and can be curated for maximum impact."
+source: "interviews/interview-plan-001.yaml#IQ-plan-001-007"
+status: settled
+cycle_created: 0
+cycle_modified: null

@@ -1,0 +1,13 @@
+id: GP-05
+type: guiding_principle
+name: Concrete Over Abstract
+status: active
+description: |
+  Show, don't tell. Every feature claim includes a tangible example — a YAML snippet,
+  a code block, a diagram of actual data flow, a real metric. "Ideate manages the
+  full SDLC" is a claim; showing the plan→execute→review→refine cycle with real
+  artifacts from ideate building itself is proof. The meta-narrative (this deck was
+  built with ideate) is the ultimate concrete example.
+amendment_history: []
+cycle_created: 0
+cycle_modified: null
